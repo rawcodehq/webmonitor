@@ -1,6 +1,7 @@
 # Feature list
 
-  - Should send a Notification when a website goes down.
+  + Should send a Notification when a website goes down.
+
   - Should send a Notification when a website comes back up.
   - Should test a website from multiple locations if it goes down.
   - Should work if one of our server goes down
