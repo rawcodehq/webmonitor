@@ -5,14 +5,15 @@ defmodule Webmonitor.Checker do
 
   defmodule Stats do
     @type t :: %Webmonitor.Checker.Stats{response_time: non_neg_integer}
-    defstruct response_time: 1
+    defstruct response_time: 0
   end
 
   @spec ping(binary) :: {atom, binary | Stats.t}
   def ping(url) when is_binary(url) do
-    case HTTPoison.get(url) do
+    {microseconds, response} = :timer.tc(HTTPoison, :get, [url])
+    case response do
       {:ok, %HTTPoison.Response{status_code: 200}} ->
-        {:ok, %Stats{}}
+        {:ok, %Stats{response_time: round(microseconds/1000)}}
       {:ok, %HTTPoison.Response{status_code: status_code}} ->
         {:error, "Non successful status code #{status_code}"}
       {:error, %HTTPoison.Error{reason: reason}} ->
