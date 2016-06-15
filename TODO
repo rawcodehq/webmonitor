@@ -1,0 +1,15 @@
+# Feature list
+
+  - Should send a Notification when a website goes down.
+  - Should send a Notification when a website comes back up.
+  - Should test a website from multiple locations if it goes down.
+  - Should work if one of our server goes down
+  - Should make the test every minute
+  - Should allow configuring headers of the request?
+  - Should allow testing complex info about the server
+  - Should record stats like response time across different servers
+  - Should allow user to make this info public
+  - Should show a nice graph of uptime which can be embedded by the user
+  - Domain monitoring
+  - SSL monitoring
+  - Virus scanning via a google api?
