@@ -37,6 +37,8 @@ defmodule Webmonitor.Mixfile do
      {:gettext, "~> 0.9"},
      {:cowboy, "~> 1.0"},
 
+     {:comeonin, "~> 2.4"},
+     {:guardian, "~> 0.12.0"},
      {:httpoison, "~> 0.8.0"},
      {:bamboo, "~> 0.6"},
 
