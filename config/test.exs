@@ -17,3 +17,7 @@ config :webmonitor, Webmonitor.Repo,
   database: "webmonitor_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
+
+# email config
+config :webmonitor, Webmonitor.Mailer,
+  adapter: Bamboo.TestAdapter

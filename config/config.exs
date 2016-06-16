@@ -27,3 +27,11 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
+
+# email config
+config :webmonitor, Webmonitor.Mailer,
+  adapter: Bamboo.LocalAdapter
+
+config :webmonitor,
+  # email
+  default_sender: "Webmonitor Notification <noreply@webmonitor.com>"
