@@ -21,6 +21,7 @@ defmodule Webmonitor.ConnCase do
       use Phoenix.ConnTest
 
       alias Webmonitor.Repo
+      alias Webmonitor.{User}
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]

@@ -22,14 +22,24 @@ defmodule Webmonitor.User do
     model
     |> cast(params, @required_fields, @optional_fields)
     |> encrypt_password
+    |> clean_email
+    |> unique_constraint(:email)
   end
 
+  # encrypt password only if the password field has a change
   defp encrypt_password(cs) do
     case get_change(cs, :password) do
       nil -> cs
       password ->
         encrypted_password =  Comeonin.Bcrypt.hashpwsalt(password)
         put_change(cs, :encrypted_password, encrypted_password)
+    end
+  end
+
+  defp clean_email(cs) do
+    case get_change(cs, :email) do
+      nil -> cs
+      email -> put_change(cs, :email, email|> String.downcase)
     end
   end
 end

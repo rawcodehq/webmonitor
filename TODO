@@ -1,6 +1,11 @@
 # Feature list
 
-  + Should send a Notification when a website goes down.
+  * Should send a Notification when a website goes down.
+    + registration
+    - sign in
+    - creating of monitors
+    - scheduled checks every 1 minute
+    - notifications
 
   - Should send a Notification when a website comes back up.
   - Should test a website from multiple locations if it goes down.
