@@ -26,11 +26,25 @@ defmodule Webmonitor.Web do
     end
   end
 
+  def action do
+    quote do
+      alias Webmonitor.{Repo,User}
+
+      import Ecto
+      import Ecto.Query, only: [from: 1, from: 2]
+      import Phoenix.Controller
+      import Webmonitor.Router.Helpers
+      import Webmonitor.Gettext
+    end
+  end
+
+
   def controller do
     quote do
       use Phoenix.Controller
 
-      alias Webmonitor.Repo
+      alias Webmonitor.{Repo,User}
+
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
 

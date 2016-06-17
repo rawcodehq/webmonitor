@@ -4,11 +4,12 @@ defmodule Webmonitor.User do
   schema "users" do
     field :email, :string
     field :encrypted_password, :string
+    field :password, :string, virtual: true
 
     timestamps
   end
 
-  @required_fields ~w(email encrypted_password)
+  @required_fields ~w(email password)
   @optional_fields ~w()
 
   @doc """
@@ -20,5 +21,15 @@ defmodule Webmonitor.User do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+    |> encrypt_password
+  end
+
+  defp encrypt_password(cs) do
+    case get_change(cs, :password) do
+      nil -> cs
+      password ->
+        encrypted_password =  Comeonin.Bcrypt.hashpwsalt(password)
+        put_change(cs, :encrypted_password, encrypted_password)
+    end
   end
 end
