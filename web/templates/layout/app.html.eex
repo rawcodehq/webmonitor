@@ -14,7 +14,15 @@
   <body>
     <div class="container">
 
-      <a href="/registration/new" >Sign Up</a>
+      <%= if user_signed_in?(@conn) do %>
+        <a href="/session/destroy" data-method=delete>Sign Out</a>
+      <% else %>
+        <a href="/session/new" >Sign In</a>
+        |
+        <a href="/registration/new" >Sign Up</a>
+      <% end %>
+      |
+      <%= safe_get @current_user, :email %>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>

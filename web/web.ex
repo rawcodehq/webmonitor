@@ -19,6 +19,7 @@ defmodule Webmonitor.Web do
   def model do
     quote do
       use Ecto.Schema
+      use Webmonitor.ModelHelpers
 
       import Ecto
       import Ecto.Changeset
@@ -38,6 +39,16 @@ defmodule Webmonitor.Web do
     end
   end
 
+  def plug do
+    quote do
+      use Phoenix.Controller
+      alias Webmonitor.{Repo,User}
+
+      @behaviour Plug
+
+      def init(opts), do: opts
+    end
+  end
 
   def controller do
     quote do

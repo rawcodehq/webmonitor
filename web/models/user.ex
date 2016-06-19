@@ -26,8 +26,11 @@ defmodule Webmonitor.User do
     |> unique_constraint(:email)
   end
 
+  def password_valid?(nil, _password), do: Comeonin.Bcrypt.dummy_checkpw
+  def password_valid?(user, password), do: Comeonin.Bcrypt.checkpw(password, user.encrypted_password)
+
   # encrypt password only if the password field has a change
-  defp encrypt_password(cs) do
+  defp encrypt_password(%Ecto.Changeset{} = cs) do
     case get_change(cs, :password) do
       nil -> cs
       password ->

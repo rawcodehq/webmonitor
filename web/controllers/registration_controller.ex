@@ -5,7 +5,7 @@ defmodule Webmonitor.RegistrationController do
 
   def new(conn, _params) do
     conn
-    |> render(user: User.changeset(%User{}))
+    |> render(user: User.empty_changeset)
   end
 
   def create(conn, %{"user" => registration_params}) do
