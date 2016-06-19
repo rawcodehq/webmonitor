@@ -11,7 +11,7 @@ defmodule Webmonitor.SessionController do
       {:ok, user} ->
         conn
         #|> Guardian.fl sign the user into our app here
-        |> put_session(:user_id, user.id)
+        |> put_session(:user_id, user.id) #TODO: extract into a module
         |> put_flash(:info, "Signed in successfully")
         |> redirect(to: "/")
       :error ->
@@ -19,5 +19,12 @@ defmodule Webmonitor.SessionController do
         |> put_flash(:error, "Email or password incorrect")
         |> render(:new, user: User.changeset(%User{}, %{email: user_params["email"]}))
     end
+  end
+
+  def delete(conn, _params) do
+    conn
+    |> clear_session
+    |> put_flash(:info, "Successfully logged out")
+    |> redirect(to: "/")
   end
 end

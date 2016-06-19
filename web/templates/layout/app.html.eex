@@ -15,7 +15,7 @@
     <div class="container">
 
       <%= if user_signed_in?(@conn) do %>
-        <a href="/session/destroy" data-method=delete>Sign Out</a>
+        <%= link "Sign Out", to: "/session", method: :delete %>
       <% else %>
         <a href="/session/new" >Sign In</a>
         |

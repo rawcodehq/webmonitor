@@ -24,7 +24,7 @@ defmodule Webmonitor.Router do
 
     get "/", PageController, :index
     resources "/registration", RegistrationController, only: [:new, :create], singleton: true
-    resources "/session", SessionController, only: [:new, :create, :destroy], singleton: true
+    resources "/session", SessionController, only: [:new, :create, :delete], singleton: true
   end
 
   # authenticated routes
