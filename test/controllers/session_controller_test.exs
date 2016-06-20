@@ -12,7 +12,8 @@ defmodule Webmonitor.SesssionControllerTest do
 
     conn = post conn, session_path(conn, :create), user: @valid_attrs
     assert redirected_to(conn) == "/"
-    assert get_session(conn, :user_id) == user.id
+    conn = get conn, "/"
+    assert html_response(conn, 200) =~ user.email
   end
 
   test "login fails if email is invalid", %{conn: conn} do
@@ -20,7 +21,6 @@ defmodule Webmonitor.SesssionControllerTest do
 
     conn = post conn, session_path(conn, :create), user: %{email: "ooh@rigby.com", password: user.password}
     assert html_response(conn, 200) =~ "Email or password incorrect"
-    assert get_session(conn, :user_id) == nil
   end
 
   test "login fails if password is invalid", %{conn: conn} do
@@ -28,7 +28,6 @@ defmodule Webmonitor.SesssionControllerTest do
 
     conn = post conn, session_path(conn, :create), user: %{email: user.email, password: "please"}
     assert html_response(conn, 200) =~ "Email or password incorrect"
-    assert get_session(conn, :user_id) == nil
   end
 
 end
