@@ -1,0 +1,2 @@
+<h1>Check Monitor (<%= @monitor.url %>)</h1>
+<%= inspect Webmonitor.Checker.ping(@monitor.url) %>

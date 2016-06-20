@@ -3,10 +3,12 @@ defmodule Webmonitor.MonitorController do
 
   alias Webmonitor.Monitor
 
+  # TODO: all queries should be anchored by current_user.id
+
   plug :scrub_params, "monitor" when action in [:create, :update]
 
   def index(conn, _params) do
-    monitors = conn.assigns.current_user |> unwrap |> Repo.preload(:monitors) |> Map.get(:monitors)
+    monitors = Repo.Monitors.for_user(current_user_id(conn))
     render(conn, "index.html", monitors: monitors)
   end
 
@@ -16,8 +18,7 @@ defmodule Webmonitor.MonitorController do
   end
 
   def create(conn, %{"monitor" => monitor_params}) do
-    {:just, current_user} = conn.assigns.current_user
-    monitor_params = Map.put_new(monitor_params, "user_id", current_user.id)
+    monitor_params = Map.put_new(monitor_params, "user_id", current_user_id(conn))
     changeset = Monitor.changeset(%Monitor{}, monitor_params)
 
     case Repo.insert(changeset) do
@@ -28,6 +29,12 @@ defmodule Webmonitor.MonitorController do
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+  end
+
+  def check(conn, %{"id" => id}) do
+    monitor = Repo.Monitors.get(current_user_id(conn), id)
+    conn
+    |> render(monitor: monitor)
   end
 
   def show(conn, %{"id" => id}) do
@@ -65,5 +72,9 @@ defmodule Webmonitor.MonitorController do
     conn
     |> put_flash(:info, "Monitor deleted successfully.")
     |> redirect(to: monitor_path(conn, :index))
+  end
+
+  defp current_user_id(conn) do
+    (conn.assigns.current_user |> unwrap).id
   end
 end
