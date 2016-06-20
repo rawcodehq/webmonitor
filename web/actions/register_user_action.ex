@@ -6,7 +6,6 @@ defmodule Webmonitor.RegisterUserAction do
     user = User.changeset(%User{}, params)
     case Repo.insert(user) do
       {:ok, user} ->
-        # TODO: sign the user in
         {:ok, user}
       {:error, changeset} ->
         {:error, changeset}

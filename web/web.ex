@@ -30,6 +30,7 @@ defmodule Webmonitor.Web do
   def action do
     quote do
       alias Webmonitor.{Repo,User}
+      import Plug.Conn
 
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
@@ -42,6 +43,7 @@ defmodule Webmonitor.Web do
   def plug do
     quote do
       use Phoenix.Controller
+
       alias Webmonitor.{Repo,User}
 
       @behaviour Plug
