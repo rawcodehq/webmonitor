@@ -13,6 +13,9 @@
 
   <body>
     <div class="container">
+      <h1>
+        webmonitor
+      </h1>
 
       <%= if user_signed_in?(@conn) do %>
         <%= link "Sign Out", to: "/session", method: :delete %>
