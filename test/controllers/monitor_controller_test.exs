@@ -1,6 +1,10 @@
 defmodule Webmonitor.MonitorControllerTest do
   use Webmonitor.ConnCase
 
+  setup do
+    {:ok, conn: sign_in(conn)}
+  end
+
   alias Webmonitor.Monitor
   @valid_attrs %{name: "some content", url: "some content"}
   @invalid_attrs %{}

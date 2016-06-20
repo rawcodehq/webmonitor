@@ -20,6 +20,8 @@ defmodule Webmonitor.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
+      import Webmonitor.ConnCase
+
       alias Webmonitor.Repo
       alias Webmonitor.{User}
       import Ecto
@@ -30,6 +32,13 @@ defmodule Webmonitor.ConnCase do
 
       # The default endpoint for testing
       @endpoint Webmonitor.Endpoint
+
+      def sign_in(conn) do
+        user_attrs = %{"email" => "mujju@email.com", "password" => "zainu"}
+        {:ok, user} = Webmonitor.RegisterUserAction.perform(user_attrs)
+
+        post(conn, "/session", user: user_attrs)
+      end
     end
   end
 
@@ -40,4 +49,5 @@ defmodule Webmonitor.ConnCase do
 
     {:ok, conn: Phoenix.ConnTest.conn()}
   end
+
 end
