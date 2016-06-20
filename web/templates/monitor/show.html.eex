@@ -1,0 +1,23 @@
+<h2>Show monitor</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @monitor.name %>
+  </li>
+
+  <li>
+    <strong>Url:</strong>
+    <%= @monitor.url %>
+  </li>
+
+  <li>
+    <strong>User:</strong>
+    <%= @monitor.user_id %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: monitor_path(@conn, :edit, @monitor) %>
+<%= link "Back", to: monitor_path(@conn, :index) %>

@@ -31,6 +31,7 @@ defmodule Webmonitor.Router do
   scope "/", Webmonitor do
     pipe_through [:browser, :authenticated] # Use the default browser stack
 
+    resources "/monitors", MonitorController
   end
 
   # Other scopes may use custom stacks.

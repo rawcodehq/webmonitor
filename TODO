@@ -2,8 +2,11 @@
 
   * Should send a Notification when a website goes down.
     + registration
-    - sign in
+    + sign in
     - creating of monitors
+      Monitor
+        name
+        url
     - scheduled checks every 1 minute
     - notifications
 
@@ -19,3 +22,9 @@
   - Domain monitoring
   - SSL monitoring
   - Virus scanning via a google api?
+  - Add more notification contacts
+  - Notification methods
+    - HTTP webhook
+    - Slack
+    - Boxcar
+    - Android app

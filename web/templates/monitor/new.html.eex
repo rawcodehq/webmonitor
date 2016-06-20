@@ -1,0 +1,6 @@
+<h2>New monitor</h2>
+
+<%= render "form.html", changeset: @changeset,
+                        action: monitor_path(@conn, :create) %>
+
+<%= link "Back", to: monitor_path(@conn, :index) %>

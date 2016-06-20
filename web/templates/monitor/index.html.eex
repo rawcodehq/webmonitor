@@ -1,0 +1,30 @@
+<h2>Listing monitors</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Url</th>
+      <th>User</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for monitor <- @monitors do %>
+    <tr>
+      <td><%= monitor.name %></td>
+      <td><%= monitor.url %></td>
+      <td><%= monitor.user_id %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: monitor_path(@conn, :show, monitor), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: monitor_path(@conn, :edit, monitor), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: monitor_path(@conn, :delete, monitor), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New monitor", to: monitor_path(@conn, :new) %>
