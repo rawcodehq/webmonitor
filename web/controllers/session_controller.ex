@@ -22,7 +22,7 @@ defmodule Webmonitor.SessionController do
 
   def delete(conn, _params) do
     conn
-    |> Webmonitor.SignoutAction.perform(conn)
+    |> Webmonitor.SignoutAction.perform
     |> put_flash(:info, "Successfully logged out")
     |> redirect(to: "/")
   end

@@ -30,4 +30,14 @@ defmodule Webmonitor.SesssionControllerTest do
     assert html_response(conn, 200) =~ "Email or password incorrect"
   end
 
+  test "logout action logs the user out", %{conn: conn} do
+    {:ok, user} = Webmonitor.RegisterUserAction.perform(@valid_attrs)
+
+    conn = conn
+    |> delete(session_path(conn, :delete))
+    |> get("/")
+
+    refute html_response(conn, 200) =~ user.email
+    assert html_response(conn, 200) =~ "Successfully logged out"
+  end
 end
