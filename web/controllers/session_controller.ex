@@ -10,7 +10,6 @@ defmodule Webmonitor.SessionController do
     case Webmonitor.AuthenticateUserAction.perform(user_params) do
       {:ok, user} ->
         conn
-        #|> Guardian.fl sign the user into our app here
         |> put_session(:user_id, user.id) #TODO: extract into a module
         |> put_flash(:info, "Signed in successfully")
         |> redirect(to: "/")
