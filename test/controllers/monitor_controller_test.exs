@@ -2,7 +2,8 @@ defmodule Webmonitor.MonitorControllerTest do
   use Webmonitor.ConnCase
 
   setup do
-    {:ok, conn: sign_in(conn)}
+    {user, conn} = sign_in(conn)
+    {:ok, conn: conn, user: user}
   end
 
   alias Webmonitor.Monitor
@@ -19,10 +20,11 @@ defmodule Webmonitor.MonitorControllerTest do
     assert html_response(conn, 200) =~ "New monitor"
   end
 
-  test "creates resource and redirects when data is valid", %{conn: conn} do
+  test "creates resource and redirects when data is valid", %{conn: conn, user: user} do
     conn = post conn, monitor_path(conn, :create), monitor: @valid_attrs
     assert redirected_to(conn) == monitor_path(conn, :index)
-    assert Repo.get_by(Monitor, @valid_attrs)
+    monitor = Repo.get_by(Monitor, @valid_attrs)
+    assert monitor.user_id == user.id
   end
 
   test "does not create resource and renders errors when data is invalid", %{conn: conn} do

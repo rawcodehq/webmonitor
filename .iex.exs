@@ -1,2 +1,2 @@
-alias Webmonitor.User
+alias Webmonitor.{User,Monitor}
 alias Webmonitor.Repo

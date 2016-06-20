@@ -9,8 +9,8 @@ defmodule Webmonitor.Monitor do
     timestamps
   end
 
-  @required_fields ~w(name url)
-  @optional_fields ~w()
+  @required_fields ~w(url)
+  @optional_fields ~w(name user_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

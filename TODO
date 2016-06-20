@@ -3,7 +3,7 @@
   * Should send a Notification when a website goes down.
     + registration
     + sign in
-    - creating of monitors
+    + creating of monitors
       Monitor
         name
         url

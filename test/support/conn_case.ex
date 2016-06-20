@@ -33,11 +33,12 @@ defmodule Webmonitor.ConnCase do
       # The default endpoint for testing
       @endpoint Webmonitor.Endpoint
 
+      # TODO: find a better place for this
       def sign_in(conn) do
         user_attrs = %{"email" => "mujju@email.com", "password" => "zainu"}
         {:ok, user} = Webmonitor.RegisterUserAction.perform(user_attrs)
 
-        post(conn, "/session", user: user_attrs)
+        {user, post(conn, "/session", user: user_attrs)}
       end
     end
   end

@@ -6,7 +6,7 @@ defmodule Webmonitor.MonitorController do
   plug :scrub_params, "monitor" when action in [:create, :update]
 
   def index(conn, _params) do
-    monitors = Repo.all(Monitor)
+    monitors = conn.assigns.current_user |> unwrap |> Repo.preload(:monitors) |> Map.get(:monitors)
     render(conn, "index.html", monitors: monitors)
   end
 
@@ -16,6 +16,8 @@ defmodule Webmonitor.MonitorController do
   end
 
   def create(conn, %{"monitor" => monitor_params}) do
+    {:just, current_user} = conn.assigns.current_user
+    monitor_params = Map.put_new(monitor_params, "user_id", current_user.id)
     changeset = Monitor.changeset(%Monitor{}, monitor_params)
 
     case Repo.insert(changeset) do

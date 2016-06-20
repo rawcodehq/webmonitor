@@ -57,6 +57,7 @@ defmodule Webmonitor.Web do
       use Phoenix.Controller
 
       alias Webmonitor.{Repo,User}
+      import Webmonitor.MaybeWrapper
 
       import Ecto
       import Ecto.Query, only: [from: 1, from: 2]
