@@ -1,9 +1,12 @@
 defmodule Webmonitor.Monitor do
   use Webmonitor.Web, :model
 
+  @statuses %{up: 1, down: 2}
+
   schema "monitors" do
     field :name, :string
     field :url, :string
+    field :status, :integer # default value 1. 1 => :up, 2 => :down
     belongs_to :user, Webmonitor.User
 
     timestamps
