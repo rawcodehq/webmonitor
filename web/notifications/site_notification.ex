@@ -1,14 +1,15 @@
 defmodule Webmonitor.SiteNotification do
   import Bamboo.Email
 
-  def down(user, site, error) do
+  def down(user, monitor, error) when not is_nil(user) and not is_nil(monitor) do
     new_email(
       from: Webmonitor.Config.for(:default_sender),
       to: user.email,
-      subject: "Site is DOWN '#{site.url}' '#{error}'",
-      text_body: "Site is DOWN '#{site.url}' '#{error}'",
-      html_body: "Site is DOWN '#{site.url}' '#{error}'",
+      subject: "Monitor is DOWN '#{monitor.url}' '#{error}'",
+      text_body: "Monitor is DOWN '#{monitor.url}' '#{error}'",
+      html_body: "Monitor is DOWN '#{monitor.url}' '#{error}'",
     )
     #mail |> Webmonitor.Mailer.deliver_later
   end
+
 end

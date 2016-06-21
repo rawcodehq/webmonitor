@@ -19,10 +19,6 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
-# Import environment specific config. This must remain at the bottom
-# of this file so it overrides the configuration defined above.
-import_config "#{Mix.env}.exs"
-
 # Configure phoenix generators
 config :phoenix, :generators,
   migration: true,
@@ -45,3 +41,7 @@ config :guardian, Guardian,
   # TODO use env var
   secret_key: "XV+iH8jP9yXim90L5XQBsytqhTb55OZ1iArj/cRmO640ueo6aBWVwpHsBnmkL6vD", #System.get_env("BLOG_JWT_TOKEN"), #"XV+iH8jP9yXim90L5XQBsytqhTb55OZ1iArj/cRmO640ueo6aBWVwpHsBnmkL6vD",
   serializer: Webmonitor.GuardianSerializer
+
+# Import environment specific config. This must remain at the bottom
+# of this file so it overrides the configuration defined above.
+import_config "#{Mix.env}.exs"

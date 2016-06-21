@@ -22,4 +22,6 @@ defmodule Webmonitor.Monitor do
     model
     |> cast(params, @required_fields, @optional_fields)
   end
+
 end
+
