@@ -14,8 +14,9 @@ defmodule Webmonitor.MonitorCheck do
 
   defp check(monitor) do
     case Checker.ping(monitor.url) do
-      #{:ok, _stats} ->
+      {:ok, stats} ->
         # nothing to do at the moment
+        IO.inspect [monitor, stats]
       {:error, reason} ->
         send_notification(monitor, reason)
     end
@@ -24,7 +25,7 @@ defmodule Webmonitor.MonitorCheck do
   defp send_notification(monitor, reason) do
     monitor = Repo.preload(monitor, :user)
     # send a notification
-    SiteNotification.down(monitor.user, monitor, to_string(reason))
+    SiteNotification.down(monitor.user, monitor, inspect(reason))
     |> Mailer.deliver_now
   end
 

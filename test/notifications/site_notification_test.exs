@@ -1,7 +1,6 @@
 defmodule Webmonitor.SiteNotificationTest do
   use Webmonitor.ModelCase
   import Webmonitor.SiteNotification
-  #use Bamboo.Test
 
   test "#down sends an email notification" do
     mail = down(%{email: "m@u.jju"}, %{url: "https://cosmicvent.com/"}, "No Connection")
