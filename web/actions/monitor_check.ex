@@ -3,9 +3,16 @@ defmodule Webmonitor.MonitorCheck do
   Checks the monitor and sends an email if there is a problem
   """
 
-  alias Webmonitor.{Repo,SiteNotification,Mailer,Checker}
+  alias Webmonitor.{Repo,SiteNotification,Monitor,Mailer,Checker}
 
-  def perform(monitor) do
+  def check_all do
+    monitors =  Repo.all(Monitor)
+    for monitor <- monitors do
+      spawn fn-> check(monitor) end
+    end
+  end
+
+  defp check(monitor) do
     case Checker.ping(monitor.url) do
       #{:ok, _stats} ->
         # nothing to do at the moment

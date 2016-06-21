@@ -11,6 +11,7 @@ defmodule Webmonitor do
       supervisor(Webmonitor.Endpoint, []),
       # Start the Ecto repository
       supervisor(Webmonitor.Repo, []),
+      supervisor(Webmonitor.Ticker, []),
       # Here you could define other workers and supervisors as children
       # worker(Webmonitor.Worker, [arg1, arg2, arg3]),
     ]

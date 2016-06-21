@@ -1,5 +1,7 @@
 defmodule Webmonitor.Ticker do
   use GenServer
+  require Logger
+  alias Webmonitor.MonitorCheck
 
   def start_link() do
     GenServer.start_link(__MODULE__, [])
@@ -18,7 +20,8 @@ defmodule Webmonitor.Ticker do
 
   defp do_work(state) do
     # trigger a run
-    spawn(&MonitorChecker.check_all/0)
+    Logger.info("triggering MonitorCheck.check_all")
+    spawn(&MonitorCheck.check_all/0)
   end
 
   @interval_in_ms 60_000
