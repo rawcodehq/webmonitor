@@ -7,10 +7,10 @@ defmodule Webmonitor.MonitorCheckTest do
     #TODO: move this to a helper function
     user_attrs = %{"email" => "mujju@email.com", "password" => "zainu"}
     {:ok, user} = Webmonitor.RegisterUserAction.perform(user_attrs)
-    monitor = %Monitor{url: "networkwillfail.mujju", id: 33, user_id: user.id}
+    monitor = Repo.insert! %Monitor{url: "networkwillfail.mujju", user_id: user.id}
 
     mail = SiteNotification.down(user, monitor, "nxdomain")
-    MonitorCheck.perform(monitor)
+    MonitorCheck.check_all
     assert_delivered_email mail
   end
 end
