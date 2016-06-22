@@ -21,6 +21,8 @@ defmodule Webmonitor.Checker do
         {:error, "Non successful status code #{status_code}"}
       {:error, %HTTPoison.Error{reason: reason}} ->
         {:error, reason}
+      oops ->
+        {:error, "Unknown error #{inspect(oops)}"}
     end
   end
 end

@@ -22,3 +22,5 @@ config :webmonitor, Webmonitor.Repo,
 # email config
 config :webmonitor, Webmonitor.Mailer,
   adapter: Bamboo.TestAdapter
+
+config :bamboo, :refute_timeout, 10

@@ -14,7 +14,7 @@ defmodule Webmonitor.MonitorCheck do
     end
   end
 
-  defp check(monitor) do
+  def check(monitor) do
     Logger.debug "checking monitor #{monitor.url} [#{monitor.id}]"
     case Checker.ping(monitor.url) do
       {:ok, stats} ->
