@@ -15,14 +15,27 @@ defmodule Webmonitor.MonitorCheck do
   defp check(monitor) do
     case Checker.ping(monitor.url) do
       {:ok, stats} ->
-        # nothing to do at the moment
         IO.inspect [monitor, stats]
+        # send a message if monitor was previously DOWN
+        if Monitor.status_changed?(monitor, :up) do
+          send_up_notification(monitor)
+        end
       {:error, reason} ->
-        send_notification(monitor, reason)
+        if Monitor.status_changed?(monitor, :down) do
+          # send a message if monitor was previously UP
+          send_down_notification(monitor, reason)
+        end
     end
   end
 
-  defp send_notification(monitor, reason) do
+  defp send_up_notification(monitor) do
+    monitor = Repo.preload(monitor, :user)
+    # send a notification
+    SiteNotification.up(monitor.user, monitor)
+    |> Mailer.deliver_now
+  end
+
+  defp send_down_notification(monitor, reason) do
     monitor = Repo.preload(monitor, :user)
     # send a notification
     SiteNotification.down(monitor.user, monitor, inspect(reason))

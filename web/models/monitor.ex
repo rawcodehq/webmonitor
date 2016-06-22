@@ -26,5 +26,10 @@ defmodule Webmonitor.Monitor do
     |> cast(params, @required_fields, @optional_fields)
   end
 
+  # TODO: add an enum custom type
+  def status_changed?(monitor, new_status) do
+    @statuses[new_status] != monitor.status
+  end
+
 end
 
