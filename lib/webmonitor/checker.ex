@@ -3,6 +3,8 @@ defmodule Webmonitor.Checker do
   Takes care of checking the health of a website
   """
 
+  require Logger
+
   defmodule Stats do
     @type t :: %Webmonitor.Checker.Stats{response_time: non_neg_integer}
     defstruct response_time: 0
@@ -10,6 +12,7 @@ defmodule Webmonitor.Checker do
 
   @spec ping(binary) :: {atom, binary | Stats.t}
   def ping(url) when is_binary(url) do
+    Logger.debug("PINGING #{url}")
     {microseconds, response} = :timer.tc(HTTPoison, :get, [url])
     case response do
       {:ok, %HTTPoison.Response{status_code: 200}} ->

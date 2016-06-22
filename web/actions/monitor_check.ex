@@ -3,24 +3,28 @@ defmodule Webmonitor.MonitorCheck do
   Checks the monitor and sends an email if there is a problem
   """
 
+  require Logger
   alias Webmonitor.{Repo,SiteNotification,Monitor,Mailer,Checker}
 
   def check_all do
     monitors =  Repo.all(Monitor)
+    Logger.debug("checking #{Enum.count(monitors)} monitors")
     for monitor <- monitors do
       spawn fn-> check(monitor) end
     end
   end
 
   defp check(monitor) do
+    Logger.debug "checking monitor #{monitor.url} [#{monitor.id}]"
     case Checker.ping(monitor.url) do
       {:ok, stats} ->
-        IO.inspect [monitor, stats]
+        Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time}ms")
         # send a message if monitor was previously DOWN
         if Monitor.status_changed?(monitor, :up) do
           send_up_notification(monitor)
         end
       {:error, reason} ->
+        Logger.debug("monitor #{monitor.id} is down")
         if Monitor.status_changed?(monitor, :down) do
           # send a message if monitor was previously UP
           send_down_notification(monitor, reason)
