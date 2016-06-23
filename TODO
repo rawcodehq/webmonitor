@@ -9,9 +9,9 @@
         url
     + scheduled checks every 1 minute
     + notifications
+  + A notification should be sent only if the state of a monitor changes from UP to DOWN or DOWN to UP
+  + Should send a Notification when a website comes back up.
 
-  - A notification should be sent only if the state of a monitor changes from UP to DOWN or DOWN to UP
-  - Should send a Notification when a website comes back up.
   - Should test a website from multiple locations if it goes down.
   - Should work if one of our server goes down
   - Should make the test every minute

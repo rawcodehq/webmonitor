@@ -18,6 +18,8 @@
       </h1>
 
       <%= if user_signed_in?(@conn) do %>
+        <a href="/monitors" >Monitors</a>
+        |
         <%= link "Sign Out", to: "/session", method: :delete %>
       <% else %>
         <a href="/session/new" >Sign In</a>

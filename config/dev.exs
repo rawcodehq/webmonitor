@@ -40,3 +40,13 @@ config :webmonitor, Webmonitor.Repo,
   database: "webmonitor_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :webmonitor, Webmonitor.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "localhost",
+  port: 25,
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1,
+  username: "",
+  password: ""

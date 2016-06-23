@@ -41,6 +41,7 @@ defmodule Webmonitor.Mixfile do
      {:guardian, "~> 0.12.0"},
      {:httpoison, "~> 0.8.0"},
      {:bamboo, "~> 0.6"},
+     {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
 
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:credo, "~> 0.3.10", only: [:dev, :test]},
