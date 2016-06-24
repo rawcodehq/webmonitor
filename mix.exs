@@ -19,7 +19,7 @@ defmodule Webmonitor.Mixfile do
   def application do
     [mod: {Webmonitor, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-      :phoenix_ecto, :postgrex, :httpoison, :bamboo]]
+      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin]]
   end
 
   # Specifies which paths to compile per environment.
@@ -38,11 +38,14 @@ defmodule Webmonitor.Mixfile do
      {:cowboy, "~> 1.0"},
 
      {:comeonin, "~> 2.4"},
-     {:guardian, "~> 0.12.0"},
      {:httpoison, "~> 0.8.0"},
      {:bamboo, "~> 0.6"},
      {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
 
+     # deployment stuff
+     {:exrm, "~> 1.0"},
+
+     # dev stuff
      {:phoenix_live_reload, "~> 1.0", only: :dev},
      {:credo, "~> 0.3.10", only: [:dev, :test]},
      {:dialyxir, "~> 0.3.3", only: [:dev, :test]},

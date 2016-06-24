@@ -14,7 +14,9 @@
 
   - Should test a website from multiple locations if it goes down.
   - Should work if one of our server goes down
-  - Should make the test every minute
+
+  + Should make the test every minute
+
   - Should allow configuring headers of the request?
   - Should allow testing complex info about the server
   - Should record stats like response time across different servers
