@@ -10,9 +10,6 @@ defmodule Webmonitor.User do
     timestamps
   end
 
-  @required_fields ~w(email password)
-  @optional_fields ~w()
-
   @doc """
   Creates a changeset based on the `model` and `params`.
 
@@ -21,7 +18,8 @@ defmodule Webmonitor.User do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, [:email, :password])
+    |> validate_required([:email, :password])
     |> encrypt_password
     |> clean_email
     |> unique_constraint(:email)

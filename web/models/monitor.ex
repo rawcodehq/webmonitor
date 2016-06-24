@@ -12,9 +12,6 @@ defmodule Webmonitor.Monitor do
     timestamps
   end
 
-  @required_fields ~w(url)
-  @optional_fields ~w(name user_id)
-
   @doc """
   Creates a changeset based on the `model` and `params`.
 
@@ -23,7 +20,8 @@ defmodule Webmonitor.Monitor do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, @required_fields, @optional_fields)
+    |> cast(params, [:url, :name, :user_id])
+    |> validate_required([:url, :user_id])
   end
 
   # TODO: add an enum custom type

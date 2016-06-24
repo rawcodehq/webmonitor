@@ -3,7 +3,7 @@ defmodule Webmonitor.MonitorTest do
 
   alias Webmonitor.Monitor
 
-  @valid_attrs %{name: "some content", url: "some content"}
+  @valid_attrs %{name: "some content", url: "some content", user_id: 3}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

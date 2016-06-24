@@ -2,12 +2,11 @@ defmodule Webmonitor.MonitorControllerTest do
   use Webmonitor.ConnCase
 
   setup do
-    {user, conn} = sign_in(conn)
+    {user, conn} = sign_in(build_conn())
     {:ok, conn: conn, user: user}
   end
 
   alias Webmonitor.Monitor
-  @valid_attrs %{name: "some content", url: "some content"}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do
@@ -21,9 +20,9 @@ defmodule Webmonitor.MonitorControllerTest do
   end
 
   test "creates resource and redirects when data is valid", %{conn: conn, user: user} do
-    conn = post conn, monitor_path(conn, :create), monitor: @valid_attrs
+    conn = post conn, monitor_path(conn, :create), monitor: valid_attrs(user)
     assert redirected_to(conn) == monitor_path(conn, :index)
-    monitor = Repo.get_by(Monitor, @valid_attrs)
+    monitor = Repo.get_by(Monitor, valid_attrs(user))
     assert monitor.user_id == user.id
   end
 
@@ -50,11 +49,11 @@ defmodule Webmonitor.MonitorControllerTest do
     assert html_response(conn, 200) =~ "Edit monitor"
   end
 
-  test "updates chosen resource and redirects when data is valid", %{conn: conn} do
+  test "updates chosen resource and redirects when data is valid", %{conn: conn, user: user} do
     monitor = Repo.insert! %Monitor{}
-    conn = put conn, monitor_path(conn, :update, monitor), monitor: @valid_attrs
+    conn = put conn, monitor_path(conn, :update, monitor), monitor: valid_attrs(user)
     assert redirected_to(conn) == monitor_path(conn, :show, monitor)
-    assert Repo.get_by(Monitor, @valid_attrs)
+    assert Repo.get_by(Monitor, valid_attrs(user))
   end
 
   test "does not update chosen resource and renders errors when data is invalid", %{conn: conn} do
@@ -68,5 +67,9 @@ defmodule Webmonitor.MonitorControllerTest do
     conn = delete conn, monitor_path(conn, :delete, monitor)
     assert redirected_to(conn) == monitor_path(conn, :index)
     refute Repo.get(Monitor, monitor.id)
+  end
+
+  def valid_attrs(user) do
+    %{name: "some content", url: "some content", user_id: user.id}
   end
 end
