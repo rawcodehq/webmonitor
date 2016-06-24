@@ -48,7 +48,7 @@ defmodule Webmonitor.Mixfile do
 
      # dev stuff
      {:phoenix_live_reload, "~> 1.0", only: :dev},
-     {:credo, "~> 0.3.10", only: [:dev, :test]},
+     {:credo, "~> 0.4", only: [:dev, :test]},
      {:dialyxir, "~> 0.3.3", only: [:dev, :test]},
      ]
   end
@@ -60,7 +60,10 @@ defmodule Webmonitor.Mixfile do
   #
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
-    ["ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-     "ecto.reset": ["ecto.drop", "ecto.setup"]]
+    [
+      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+    ]
   end
 end

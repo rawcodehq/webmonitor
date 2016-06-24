@@ -8,11 +8,12 @@ use Mix.Config
 # Configures the endpoint
 config :webmonitor, Webmonitor.Endpoint,
   url: [host: "localhost"],
-  root: Path.dirname(__DIR__),
   secret_key_base: "5ktGskuLVdAs5AhshtAEg2oJPevaZ5t/HzWbS3N6ra1yLEpC6iSm9ejzJNVP7PCW",
   render_errors: [accepts: ~w(html json)],
   pubsub: [name: Webmonitor.PubSub,
            adapter: Phoenix.PubSub.PG2]
+
+config :webmonitor, ecto_repos: [Webmonitor.Repo]
 
 # Configures Elixir's Logger
 config :logger, :console,
