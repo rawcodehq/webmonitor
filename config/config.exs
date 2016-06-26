@@ -31,7 +31,8 @@ config :webmonitor, Webmonitor.Mailer,
 
 config :webmonitor,
   # email
-  default_sender: "Webmonitor Notification <noreply@webmonitor.com>"
+  default_sender: "noreply@webmonitorhq.com"
+  #default_sender: {"Webmonitor Notification", "<noreply@webmonitorhq.com>"}
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
