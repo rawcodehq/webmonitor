@@ -6,12 +6,13 @@
 Description=Webmonitor Phoenix Web App
 
 [Service]
+Type=simple
 User=webmonitor
 Group=webmonitor
 WorkingDirectory=/opt/www/webmonitor
 #Environment=PORT=4000
 #Environment=FOO=bar
-ExecStart=/bin/bash -lc 'source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true /opt/www/webmonitor/bin/webmonitor start'
+ExecStart=/bin/bash -lc 'source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true /opt/www/webmonitor/bin/webmonitor foreground'
 ExecStop=/bin/bash -lc 'source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true /opt/www/webmonitor/bin/webmonitor stop'
 Restart=always
 StandardInput=null
