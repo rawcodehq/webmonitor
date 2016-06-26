@@ -33,6 +33,7 @@ defmodule Webmonitor.Web do
       import Plug.Conn
 
       import Ecto
+      import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]
       import Phoenix.Controller
       import Webmonitor.Router.Helpers

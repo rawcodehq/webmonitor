@@ -15,6 +15,8 @@ defmodule Webmonitor.MonitorCheckTest do
     mail = SiteNotification.down(user, monitor, ":nxdomain")
     MonitorCheck.check_all
     assert_delivered_email mail
+    monitor = Repo.get Monitor, monitor.id
+    assert monitor.status == 2
   end
 
   test "don't send notification if monitor is down and previous state was down", %{user: user} do
@@ -33,6 +35,8 @@ defmodule Webmonitor.MonitorCheckTest do
     MonitorCheck.check_all
     :timer.sleep(1000) # TODO: fix this brittle test
     assert_delivered_email mail
+    monitor = Repo.get Monitor, monitor.id
+    assert monitor.status == 1
   end
 
   test "don't send notification if monitor is up", %{user: user} do

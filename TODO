@@ -11,11 +11,12 @@
     + notifications
   + A notification should be sent only if the state of a monitor changes from UP to DOWN or DOWN to UP
   + Should send a Notification when a website comes back up.
+  + Should make the test every minute
+
+  - Setup Nginx on the production server
+  - Setup SSL on the production server using Lets Encrypt
 
   - Should test a website from multiple locations if it goes down.
-  - Should work if one of our server goes down
-
-  + Should make the test every minute
 
   - Should allow configuring headers of the request?
   - Should allow testing complex info about the server
@@ -26,7 +27,10 @@
   - SSL monitoring
   - Virus scanning via a google api?
   - Add more notification contacts
+
   - Data should be sharded and duplicated for redundancy
+    - Should work if one of our server goes down
+
   - Notification methods
     - HTTP webhook
     - Slack
