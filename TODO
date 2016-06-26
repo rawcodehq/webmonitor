@@ -13,7 +13,7 @@
   + Should send a Notification when a website comes back up.
   + Should make the test every minute
 
-  - Setup Nginx on the production server
+  + Setup Nginx on the production server
   - Setup SSL on the production server using Lets Encrypt
   - Setup process monitoring for our web server on our linux box
   - Setup firewall on the server

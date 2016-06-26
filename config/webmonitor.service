@@ -1,0 +1,19 @@
+# start of the file
+[Unit]
+StopWhenUnneeded=true
+
+[Install]
+WantedBy=multi-user.target
+
+[Service]
+User=webmonitor
+WorkingDirectory=/opt/www/webmonitor
+Environment=PORT=4000
+#Environment=FOO=bar
+ExecStart=/bin/bash -lc '/opt/www/webmonitor/bin/webmonitor start'
+Restart=always
+StandardInput=null
+StandardOutput=/var/log/webmonitor/stdout.log
+StandardError=/var/log/webmonitor/stderr.log
+SyslogIdentifier=%n
+KillMode=process

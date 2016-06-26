@@ -19,7 +19,7 @@ defmodule Webmonitor.Mixfile do
   def application do
     [mod: {Webmonitor, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin]]
+      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin, :phoenix_pubsub]]
   end
 
   # Specifies which paths to compile per environment.
