@@ -7,7 +7,7 @@ window "src", [
 
 window "server-iex", [
   pane("iex -S mix phoenix.server"),
-  pane("iex -S mix", :horizontal),
+  #pane("iex -S mix", :horizontal),
 ]
 
 window "scratch", [

@@ -26,6 +26,7 @@
   - SSL monitoring
   - Virus scanning via a google api?
   - Add more notification contacts
+  - Data should be sharded and duplicated for redundancy
   - Notification methods
     - HTTP webhook
     - Slack

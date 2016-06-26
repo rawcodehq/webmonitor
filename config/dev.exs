@@ -44,10 +44,10 @@ config :webmonitor, Webmonitor.Repo,
 
 config :webmonitor, Webmonitor.Mailer,
   adapter: Bamboo.SMTPAdapter,
-  server: "localhost",
-  port: 25,
-  tls: :if_available, # can be `:always` or `:never`
-  ssl: false, # can be `true`
+  server: System.get_env("WM_SMTP_SERVER"),
+  port: System.get_env("WM_SMTP_PORT"),
+  tls: :always,
+  ssl: true,
   retries: 1,
-  username: "",
-  password: ""
+  username: System.get_env("WM_SMTP_USERNAME"),
+  password: System.get_env("WM_SMTP_PASSWORD")
