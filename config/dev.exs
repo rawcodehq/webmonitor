@@ -43,11 +43,4 @@ config :webmonitor, Webmonitor.Repo,
   pool_size: 10
 
 config :webmonitor, Webmonitor.Mailer,
-  adapter: Bamboo.SMTPAdapter,
-  server: System.get_env("WM_SMTP_SERVER"),
-  port: 465,
-  #tls: :always,
-  ssl: true,
-  retries: 1,
-  username: System.get_env("WM_SMTP_USERNAME"),
-  password: System.get_env("WM_SMTP_PASSWORD")
+  adapter: Bamboo.LocalAdapter
