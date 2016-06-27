@@ -18,7 +18,7 @@ defmodule Webmonitor.Ticker do
     {:noreply, state}
   end
 
-  defp do_work(state) do
+  defp do_work(_state) do
     # trigger a run
     Logger.info("triggering MonitorCheck.check_all")
     spawn(&MonitorCheck.check_all/0)

@@ -22,6 +22,7 @@
   - Use full email Webmonitor Support <noreply@..>
   - Make status an enum
   - Should record stats like response time across different servers
+  - Format the errors properly
 
 - - -
 
