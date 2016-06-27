@@ -31,11 +31,6 @@ defmodule Webmonitor.Monitor do
   end
   #Ecto.Changeset.validate_format()
 
-  # TODO: add an enum custom type
-  def status_changed?(monitor, new_status) do
-    new_status != monitor.status
-  end
-
   defp clean_url(%Ecto.Changeset{} = cs) do
     case get_change(cs, :url) do
       nil -> cs

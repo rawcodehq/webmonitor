@@ -20,16 +20,16 @@ defmodule Webmonitor.MonitorCheck do
       {:ok, stats} ->
         Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time}ms")
         # send a message if monitor was previously DOWN
-        if Monitor.status_changed?(monitor, :up) do
+        if monitor.status != :up do
           send_up_notification(monitor)
-          Webmonitor.UpdateMonitorStatusAction.update(monitor, 1)
+          Webmonitor.UpdateMonitorStatusAction.update(monitor, :up)
         end
       {:error, reason} ->
         Logger.debug("monitor #{monitor.id} is down")
-        if Monitor.status_changed?(monitor, :down) do
+        if monitor.status != :down do
           # send a message if monitor was previously UP
           send_down_notification(monitor, reason)
-          Webmonitor.UpdateMonitorStatusAction.update(monitor, 2)
+          Webmonitor.UpdateMonitorStatusAction.update(monitor, :down)
         end
     end
   end
