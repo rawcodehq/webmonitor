@@ -40,7 +40,8 @@ defmodule Webmonitor.Mixfile do
 
      {:comeonin, "~> 2.4"},
      {:httpoison, "~> 0.8.0"},
-     {:bamboo, "~> 0.6"},
+     {:bamboo, github: "thoughtbot/bamboo", override: true}, # there is an issue with bamboo using the static config and not the one provided by relx
+     #{:bamboo, "~> 0.6"},
      {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
 
      # deployment stuff
