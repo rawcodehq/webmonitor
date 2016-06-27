@@ -12,6 +12,7 @@ defmodule Webmonitor.Monitor do
     timestamps
   end
 
+  @url_regex ~r/https?:\/\/.*\..*/i
   @doc """
   Creates a changeset based on the `model` and `params`.
 
@@ -22,11 +23,26 @@ defmodule Webmonitor.Monitor do
     model
     |> cast(params, [:url, :name, :user_id])
     |> validate_required([:url, :user_id])
+    |> validate_format(:url, @url_regex)
+    |> clean_url
   end
+  #Ecto.Changeset.validate_format()
 
   # TODO: add an enum custom type
   def status_changed?(monitor, new_status) do
     @statuses[new_status] != monitor.status
+  end
+
+  defp clean_url(%Ecto.Changeset{} = cs) do
+    case get_change(cs, :url) do
+      nil -> cs
+      url -> put_change(cs, :url, url |> clean_url)
+    end
+  end
+
+  defp clean_url(url) do
+    uri = URI.parse(url)
+    %URI{uri | host: ((uri.host || "") |> String.downcase)} |> URI.to_string
   end
 
 end

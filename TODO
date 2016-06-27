@@ -16,7 +16,7 @@
   + Setup Nginx on the production server
 
   - Validation and data cleanup
-    - clean email before finding it for authentication
+    + clean email before finding it for authentication
     - clean the url before saving
       - scheme and domain should be downcased, e.g. HTTP://EXAMPLE.COM/FooBar should be saved as http://example.com/FooBar
 
