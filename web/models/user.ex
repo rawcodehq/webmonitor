@@ -41,7 +41,7 @@ defmodule Webmonitor.User do
   defp clean_email(cs) do
     case get_change(cs, :email) do
       nil -> cs
-      email -> put_change(cs, :email, email |> String.downcase)
+      email -> put_change(cs, :email, email |> String.downcase |> String.strip)
     end
   end
 end

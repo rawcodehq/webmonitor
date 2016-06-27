@@ -15,4 +15,14 @@ defmodule Webmonitor.UserTest do
     changeset = User.changeset(%User{}, @invalid_attrs)
     refute changeset.valid?
   end
+
+  test "email is cleaned up before saving" do
+    changeset = User.changeset(%User{}, %{email: "\t\n muJJU@zainU.COM    \t\n", password: "some content"})
+    assert changeset.changes.email ==  "mujju@zainu.com"
+  end
+
+  test "email is cleaned up before saving" do
+    changeset = User.changeset(%User{}, %{email: "\t\n muJJU@zainU.COM    \t\n", password: "some content"})
+    assert changeset.changes.email ==  "mujju@zainu.com"
+  end
 end
