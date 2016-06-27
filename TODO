@@ -12,16 +12,20 @@
   + A notification should be sent only if the state of a monitor changes from UP to DOWN or DOWN to UP
   + Should send a Notification when a website comes back up.
   + Should make the test every minute
-
   + Setup Nginx on the production server
-
   + Validation and data cleanup
     + clean email before finding it for authentication
     + clean the url before saving
       + scheme and domain should be downcased, e.g. HTTP://EXAMPLE.COM/FooBar should be saved as http://example.com/FooBar
+  + Setup process monitoring for our web server on our linux box
+
+  - Use full email Webmonitor Support <noreply@..>
+  - Make status an enum
+  - Should record stats like response time across different servers
+
+- - -
 
   - Setup SSL on the production server using Lets Encrypt
-  - Setup process monitoring for our web server on our linux box
   - Setup firewall on the server
   - Automate deployment using a script or edeliver or relisa
 
@@ -29,7 +33,6 @@
 
   - Should allow configuring headers of the request?
   - Should allow testing complex info about the server
-  - Should record stats like response time across different servers
   - Should allow user to make this info public
   - Should show a nice graph of uptime which can be embedded by the user
   - Domain monitoring
@@ -39,6 +42,9 @@
 
   - Data should be sharded and duplicated for redundancy
     - Should work if one of our server goes down
+
+  - Allow users to make the stats of their app public
+  - Add a REST API
 
   - Notification methods
     - HTTP webhook

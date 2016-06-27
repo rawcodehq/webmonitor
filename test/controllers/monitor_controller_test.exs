@@ -70,6 +70,6 @@ defmodule Webmonitor.MonitorControllerTest do
   end
 
   def valid_attrs(user) do
-    %{name: "some content", url: "some content", user_id: user.id}
+    %{name: "some content", url: "http://example.com/awesome", user_id: user.id}
   end
 end
