@@ -19,7 +19,7 @@
       + scheme and domain should be downcased, e.g. HTTP://EXAMPLE.COM/FooBar should be saved as http://example.com/FooBar
   + Setup process monitoring for our web server on our linux box
 
-  - Use full email Webmonitor Support <noreply@..>
+  + Use full email Webmonitor Support <noreply@..>
   - Make status an enum
   - Should record stats like response time across different servers
   - Format the errors properly

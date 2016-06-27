@@ -10,17 +10,17 @@ defmodule Webmonitor.MonitorCheckTest do
   end
 
   test "send notification if monitor is down", %{user: user} do
-    monitor = Repo.insert! %Monitor{url: "networkwillfail.mujju", user_id: user.id, status: 1}
+    monitor = Repo.insert! %Monitor{url: "networkwillfail.mujju", user_id: user.id, status: :up}
 
     mail = SiteNotification.down(user, monitor, ":nxdomain")
     MonitorCheck.check_all
     assert_delivered_email mail
     monitor = Repo.get Monitor, monitor.id
-    assert monitor.status == 2
+    assert monitor.status == :down
   end
 
   test "don't send notification if monitor is down and previous state was down", %{user: user} do
-    monitor = Repo.insert! %Monitor{url: "networkwillfail.mujju", user_id: user.id, status: 2}
+    monitor = Repo.insert! %Monitor{url: "networkwillfail.mujju", user_id: user.id, status: :down}
 
     mail = SiteNotification.down(user, monitor, ":nxdomain")
     MonitorCheck.check_all
@@ -29,18 +29,18 @@ defmodule Webmonitor.MonitorCheckTest do
 
 
   test "send notification if monitor is up", %{user: user} do
-    monitor = Repo.insert! %Monitor{url: "http://example.com/", user_id: user.id, status: 2}
+    monitor = Repo.insert! %Monitor{url: "http://example.com/", user_id: user.id, status: :down}
 
     mail = SiteNotification.up(user, monitor)
     MonitorCheck.check_all
     :timer.sleep(1000) # TODO: fix this brittle test
     assert_delivered_email mail
     monitor = Repo.get Monitor, monitor.id
-    assert monitor.status == 1
+    assert monitor.status == :up
   end
 
   test "don't send notification if monitor is up", %{user: user} do
-    monitor = Repo.insert! %Monitor{url: "http://example.com/", user_id: user.id, status: 1}
+    monitor = Repo.insert! %Monitor{url: "http://example.com/", user_id: user.id, status: :up}
 
     mail = SiteNotification.up(user, monitor)
     MonitorCheck.check_all

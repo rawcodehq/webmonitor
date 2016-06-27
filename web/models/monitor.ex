@@ -1,12 +1,15 @@
 defmodule Webmonitor.Monitor do
   use Webmonitor.Web, :model
 
-  @statuses %{up: 1, down: 2}
+  # status enum
+  defmodule MonitorStatus do
+    use Webmonitor.EctoEnum, up: 1, down: 2
+  end
 
   schema "monitors" do
     field :name, :string
     field :url, :string
-    field :status, :integer # default value 1. 1 => :up, 2 => :down
+    field :status, MonitorStatus
     belongs_to :user, Webmonitor.User
 
     timestamps
@@ -30,7 +33,7 @@ defmodule Webmonitor.Monitor do
 
   # TODO: add an enum custom type
   def status_changed?(monitor, new_status) do
-    @statuses[new_status] != monitor.status
+    new_status != monitor.status
   end
 
   defp clean_url(%Ecto.Changeset{} = cs) do
