@@ -32,7 +32,7 @@ defmodule Webmonitor.MonitorTest do
   end
 
   test "does not change the path" do
-    changeset = Monitor.changeset(%Monitor{}, %{name: "some content", url: "HTTP://GOOgle.com/FooBar.aspX", user_id: 3})
-    assert changeset.changes.url == "http://google.com/FooBar.aspX"
+    changeset = Monitor.changeset(%Monitor{}, %{name: "some content", url: "HTTP://GOOgle.com/FooBar.aspX?Cool-Stuff=Yayya#MujjuAndZainu-", user_id: 3})
+    assert changeset.changes.url == "http://google.com/FooBar.aspX?Cool-Stuff=Yayya#MujjuAndZainu-"
   end
 end
