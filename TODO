@@ -15,14 +15,15 @@
 
   + Setup Nginx on the production server
 
-  - Validation and data cleanup
+  + Validation and data cleanup
     + clean email before finding it for authentication
-    - clean the url before saving
-      - scheme and domain should be downcased, e.g. HTTP://EXAMPLE.COM/FooBar should be saved as http://example.com/FooBar
+    + clean the url before saving
+      + scheme and domain should be downcased, e.g. HTTP://EXAMPLE.COM/FooBar should be saved as http://example.com/FooBar
 
   - Setup SSL on the production server using Lets Encrypt
   - Setup process monitoring for our web server on our linux box
   - Setup firewall on the server
+  - Automate deployment using a script or edeliver or relisa
 
   - Should test a website from multiple locations if it goes down.
 
