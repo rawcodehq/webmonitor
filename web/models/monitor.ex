@@ -11,6 +11,7 @@ defmodule Webmonitor.Monitor do
     field :url, :string
     field :status, MonitorStatus
     belongs_to :user, Webmonitor.User
+    has_many :events, MonitorEvent
 
     timestamps
   end

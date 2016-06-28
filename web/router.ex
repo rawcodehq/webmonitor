@@ -31,7 +31,8 @@ defmodule Webmonitor.Router do
   scope "/", Webmonitor do
     pipe_through [:browser, :authenticated] # Use the default browser stack
 
-    get "/", MonitorController, :index
+    # TODO: make this the home page if the user is logged in
+    #get "/", MonitorController, :index
     resources "/monitors", MonitorController
     get "/monitors/:id/check", MonitorController, :check
   end
