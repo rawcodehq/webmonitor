@@ -1,30 +1,29 @@
 <h2>Listing monitors</h2>
 
+<%= link "New monitor", to: monitor_path(@conn, :new) %>
+
 <table class="table">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Url</th>
+      <th>Monitor</th>
       <th>Status</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for monitor <- @monitors do %>
-    <tr>
-      <td><%= monitor.name %></td>
-      <td><%= monitor.url %></td>
-      <td><%= monitor.status %></td>
+    <%= for monitor <- @monitors do %>
+      <tr>
+        <td>
+          <%= link monitor_label(monitor), to: monitor_path(@conn, :show, monitor), class: "btn btn-default btn-xs" %>
+        </td>
+        <td><%= monitor.status %></td>
 
-      <td class="text-right">
-        <%= link "Show", to: monitor_path(@conn, :show, monitor), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: monitor_path(@conn, :edit, monitor), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: monitor_path(@conn, :delete, monitor), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
+        <td class="text-right">
+          <%= link "Edit", to: monitor_path(@conn, :edit, monitor), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: monitor_path(@conn, :delete, monitor), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+        </td>
+      </tr>
+    <% end %>
   </tbody>
 </table>
-
-<%= link "New monitor", to: monitor_path(@conn, :new) %>

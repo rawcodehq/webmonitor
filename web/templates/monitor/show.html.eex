@@ -13,8 +13,8 @@
   </li>
 
   <li>
-    <strong>User:</strong>
-    <%= @monitor.user_id %>
+    <strong>Status:</strong>
+    <%= @monitor.status %>
   </li>
 
 </ul>

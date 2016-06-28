@@ -20,8 +20,8 @@
   + Setup process monitoring for our web server on our linux box
   + Use full email Webmonitor Support <noreply@..>
   + Make status an enum
+  + Show current status of monitors
 
-  - Show current status of monitors
   - Should record events like UP and DOWN
   - Should record stats like response time across different servers
   - Format the errors properly

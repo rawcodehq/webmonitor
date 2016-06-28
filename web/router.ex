@@ -22,7 +22,7 @@ defmodule Webmonitor.Router do
   scope "/", Webmonitor do
     pipe_through :browser # Use the default browser stack
 
-    get "/", MonitorController, :index
+    get "/", PageController, :index
     resources "/registration", RegistrationController, only: [:new, :create], singleton: true
     resources "/session", SessionController, only: [:new, :create, :delete], singleton: true
   end
@@ -31,14 +31,10 @@ defmodule Webmonitor.Router do
   scope "/", Webmonitor do
     pipe_through [:browser, :authenticated] # Use the default browser stack
 
+    get "/", MonitorController, :index
     resources "/monitors", MonitorController
     get "/monitors/:id/check", MonitorController, :check
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", Webmonitor do
-  #   pipe_through :api
-  # end
 
   # dev stuff
   if Mix.env == :dev do
