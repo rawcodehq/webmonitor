@@ -21,6 +21,7 @@ defmodule Webmonitor.Web do
       use Ecto.Schema
       use Webmonitor.ModelHelpers
 
+      alias Webmonitor.{User,MonitorEvent,Monitor}
       import Ecto
       import Ecto.Changeset
       import Ecto.Query, only: [from: 1, from: 2]

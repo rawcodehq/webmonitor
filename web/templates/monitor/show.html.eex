@@ -1,22 +1,17 @@
-<h2>Show monitor</h2>
+<h2>
+  <%= monitor_label(@monitor) %>
+  <small>
+    (<%= @monitor.status %>)
+  </small>
+</h2>
 
+<h2>Events</h2>
 <ul>
-
-  <li>
-    <strong>Name:</strong>
-    <%= @monitor.name %>
-  </li>
-
-  <li>
-    <strong>Url:</strong>
-    <%= @monitor.url %>
-  </li>
-
-  <li>
-    <strong>Status:</strong>
-    <%= @monitor.status %>
-  </li>
-
+  <%= for event <- @events do %>
+    <li>
+      <%= event.status %> at <%= event.inserted_at %>
+    </li>
+  <% end %>
 </ul>
 
 <%= link "Edit", to: monitor_path(@conn, :edit, @monitor) %>

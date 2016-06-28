@@ -1,7 +1,7 @@
 defmodule Webmonitor.MonitorController do
   use Webmonitor.Web, :controller
 
-  alias Webmonitor.Monitor
+  alias Webmonitor.{Monitor,MonitorEvent}
 
   # TODO: all queries should be anchored by current_user.id
 
@@ -39,7 +39,9 @@ defmodule Webmonitor.MonitorController do
 
   def show(conn, %{"id" => id}) do
     monitor = Repo.get!(Monitor, id)
-    render(conn, "show.html", monitor: monitor)
+    # TODO: find a way to get it in this order via monitor.events
+    events = Repo.all(from e in MonitorEvent, where: e.monitor_id == ^monitor.id, order_by: [desc: :id])
+    render(conn, "show.html", monitor: monitor, events: events)
   end
 
   def edit(conn, %{"id" => id}) do
