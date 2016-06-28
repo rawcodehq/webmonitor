@@ -22,7 +22,7 @@ defmodule Webmonitor.Router do
   scope "/", Webmonitor do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", MonitorController, :index
     resources "/registration", RegistrationController, only: [:new, :create], singleton: true
     resources "/session", SessionController, only: [:new, :create, :delete], singleton: true
   end
@@ -39,4 +39,10 @@ defmodule Webmonitor.Router do
   # scope "/api", Webmonitor do
   #   pipe_through :api
   # end
+
+  # dev stuff
+  if Mix.env == :dev do
+    # to view sent emails on the current server using the local adapter
+    forward "/sent_emails", Bamboo.EmailPreviewPlug
+  end
 end

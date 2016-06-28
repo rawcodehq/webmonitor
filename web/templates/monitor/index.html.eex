@@ -5,7 +5,7 @@
     <tr>
       <th>Name</th>
       <th>Url</th>
-      <th>User</th>
+      <th>Status</th>
 
       <th></th>
     </tr>
@@ -15,7 +15,7 @@
     <tr>
       <td><%= monitor.name %></td>
       <td><%= monitor.url %></td>
-      <td><%= monitor.user_id %></td>
+      <td><%= monitor.status %></td>
 
       <td class="text-right">
         <%= link "Show", to: monitor_path(@conn, :show, monitor), class: "btn btn-default btn-xs" %>
