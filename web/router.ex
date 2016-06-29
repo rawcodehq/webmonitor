@@ -35,6 +35,7 @@ defmodule Webmonitor.Router do
     #get "/", MonitorController, :index
     resources "/monitors", MonitorController
     get "/monitors/:id/check", MonitorController, :check
+    resources "/user", UserController, singleton: true, only: [:edit, :update]
   end
 
   # dev stuff

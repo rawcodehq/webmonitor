@@ -82,6 +82,7 @@ defmodule Webmonitor.Web do
       import Webmonitor.Router.Helpers
       import Webmonitor.ErrorHelpers
       import Webmonitor.Gettext
+      import Webmonitor.TemplateHelpers
     end
   end
 

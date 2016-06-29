@@ -9,7 +9,7 @@
 <ul>
   <%= for event <- @events do %>
     <li>
-      <%= event.status %> at <%= event.inserted_at %>
+      <%= event.status %> at <%= format_datetime(@conn, event.inserted_at) %>
     </li>
   <% end %>
 </ul>

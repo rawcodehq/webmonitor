@@ -1,0 +1,4 @@
+<%= form_for @user, "/user", fn f ->  %>
+<%= select f, :timezone, Timex.timezones %>
+<input type="submit" value="Update" />
+<% end %>

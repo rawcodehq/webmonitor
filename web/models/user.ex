@@ -5,6 +5,7 @@ defmodule Webmonitor.User do
     field :email, :string
     field :encrypted_password, :string
     field :password, :string, virtual: true
+    field :timezone, :string
     has_many :monitors, Webmonitor.Monitor
 
     timestamps
@@ -18,7 +19,7 @@ defmodule Webmonitor.User do
   """
   def changeset(model, params \\ %{}) do
     model
-    |> cast(params, [:email, :password])
+    |> cast(params, [:email, :password, :timezone])
     |> validate_required([:email, :password])
     |> encrypt_password
     |> clean_email
