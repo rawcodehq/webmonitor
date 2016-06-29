@@ -3,6 +3,7 @@ defmodule Webmonitor.MonitorEvent do
 
   schema "monitor_events" do
     field :status, Webmonitor.Monitor.MonitorStatus
+    field :reason, :string
     belongs_to :monitor, Webmonitor.Monitor
 
     timestamps()

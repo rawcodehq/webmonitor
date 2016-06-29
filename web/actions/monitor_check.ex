@@ -29,7 +29,7 @@ defmodule Webmonitor.MonitorCheck do
         if monitor.status != :down do
           # send a message if monitor was previously UP
           send_down_notification(monitor, reason)
-          Webmonitor.UpdateMonitorStatusAction.update(monitor, :down)
+          Webmonitor.UpdateMonitorStatusAction.update(monitor, :down, reason)
         end
     end
   end
