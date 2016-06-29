@@ -24,7 +24,7 @@
 
   + Should record events like UP and DOWN
   + Format times according to the user's timezone
-  - Should show the event's reason if it is a DOWN event
+  + Should show the event's reason if it is a DOWN event
   - Should record stats like response time across different servers
   - Format the errors properly
 
