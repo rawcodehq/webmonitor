@@ -27,6 +27,7 @@
   + Should show the event's reason if it is a DOWN event
   - Should record stats like response time
   - Should show uptime for the last 24 hours, 7 days, 1 month
+  - Remove updated_at from MonitorEvent
 
 - - -
 
