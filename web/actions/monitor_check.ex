@@ -4,7 +4,7 @@ defmodule Webmonitor.MonitorCheck do
   """
 
   require Logger
-  alias Webmonitor.{Repo,SiteNotification,Monitor,Mailer,Checker}
+  alias Webmonitor.{Repo,SiteNotification,Monitor,Mailer,Checker, MonitorStat}
 
   def check_all do
     monitors =  Repo.all(Monitor)
@@ -24,6 +24,7 @@ defmodule Webmonitor.MonitorCheck do
           send_up_notification(monitor)
           Webmonitor.UpdateMonitorStatusAction.update(monitor, :up)
         end
+        Repo.insert %MonitorStat{response_time_ms: stats.response_time}
       {:error, reason} ->
         Logger.debug("monitor #{monitor.id} is down")
         if monitor.status != :down do
