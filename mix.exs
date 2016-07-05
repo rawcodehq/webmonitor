@@ -19,7 +19,7 @@ defmodule Webmonitor.Mixfile do
   def application do
     [mod: {Webmonitor, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin, :phoenix_pubsub, :tzdata, :timex]]
+      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin, :phoenix_pubsub, :tzdata, :timex, :timex_ecto]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,6 +39,7 @@ defmodule Webmonitor.Mixfile do
      {:cowboy, "~> 1.0"},
 
      {:timex, "~> 2.2"},
+     {:timex_ecto, "~> 1.1"},
      {:comeonin, "~> 2.4"},
      {:httpoison, "~> 0.8.0"},
      {:bamboo, github: "thoughtbot/bamboo", override: true}, # there is an issue with bamboo using the static config and not the one provided by relx

@@ -1,0 +1,76 @@
+Last 24 hours
+
+  Uptime
+  if there are no events
+    if the monitor status is up uptime is 24h
+    if the monitor status is down uptime is 0h
+
+  if there is 1 up event
+    up - 24h_ago
+    #100 * difference(up_event.inserted_at, now - 24 hours)
+
+  if there is 1 down event
+    (now - down)
+    #100 * difference(down_event.inserted_at, now)
+
+  if there is 1 down and then 1 up event
+    (up - down)
+
+  if there is 1 up and then 1 down event
+    now - down
+    #24h - (up - 24h_beginning + now - down)
+
+  # generic
+  if the latest is a down event and the only down event, then downtime = now-down
+
+
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+Wrong formula
+
+  up1 - down0 + up2 - down
+
+````````````````````````````````````````
+1
+  d0 u1 d2 u3 d4 ue
+  u1 - d0 + u3 - d2 + ue - d4
+
+2
+  d0 u1 d2 u3 d4 u5 de
+  u1 - d0 + u3 - d2 + u5 - d4
+````````````````````````````````````````
+
+  inverse anchor at start down at 0 =>    up => down => up => down          => up   inverse at anchor now
+  inverse anchor at start down at 0 =>    up => down => up => down => up    => down inverse at anchor now
+````````````````````````````````````````
+
+3
+  u0 d1 u2 d3 u4 de
+  u2 - d1 + u4 - d3
+
+4
+  u0 d1 u2 d3 u4 d5 ue
+  u2 - d1 + u4 - d3 + u3 - d5
+
+  inverse anchor at start up   at 0 =>    down => up => down => up          => down inverse at anchor now
+  inverse anchor at start up   at 0 =>    down => up => down => up => down  => up   inverse at anchor now
+
+
+
+  S1
+  down
+  u0 d1 ue
+  ue - d1
+
+
+  down up
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+1 u0 d u d u d de
+2 u0 d u d u ue
+3 d0 u d u d de
+4 d0 u d u d u ue
+
+
+
+

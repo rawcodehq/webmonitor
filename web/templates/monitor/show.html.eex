@@ -5,6 +5,11 @@
   </small>
 </h2>
 
+<h3>Uptime</h3>
+<p>
+  Last 24 hours: <%=  %>
+</p>
+
 <h2>Events</h2>
 <ul>
   <%= for event <- @events do %>

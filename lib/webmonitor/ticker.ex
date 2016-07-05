@@ -24,7 +24,7 @@ defmodule Webmonitor.Ticker do
     spawn(&MonitorCheck.check_all/0)
   end
 
-  @interval_in_ms 60_000
+  @interval_in_ms 60_000 * 5
   defp schedule_work do
     Process.send_after(self(), :work, @interval_in_ms)
   end
