@@ -2,10 +2,7 @@
 #   1. Decide the duration (24 hours, 7 days, 30 days)
 #   2. Select all the events in that duration
 #   3. Add an UP event at the end of the duration
-#   4.
-#     i.  Add a inverse of the first event at the beginning of this duration
-#         e.g. if the first event is an UP add a DOWN and vice versa
-#     ii. If there is no event in the duration, use the status of the latest event before start time
+#   4. Add a new event the beginning of this duration, use the status of the latest event before start time
 #   5. Start from the first UP event after a DOWN event and subtract the DOWN event_at from the UP event_at, do this till you reach the end.
 #       This gives you the downtime
 #   6. Subtract duration from downtime to get uptime duration
@@ -46,7 +43,7 @@ defmodule Webmonitor.UptimeCalculator do
     # 3. Add UP event at the tail
     events = events ++ [%MonitorEvent{status: :up, inserted_at: end_time}] # NOTE: this is slow, any way to make this faster?
 
-    # 4. Add inverse event at the head
+    # 4. Add previous event at the head at 0 time
     events = [%MonitorEvent{status: first_event_status(monitor, start_time), inserted_at: start_time} | events]
 
     downtime = downtime_for(events)
