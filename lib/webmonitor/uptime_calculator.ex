@@ -47,7 +47,7 @@ defmodule Webmonitor.UptimeCalculator do
     events = events ++ [%MonitorEvent{status: :up, inserted_at: end_time}] # NOTE: this is slow, any way to make this faster?
 
     # 4. Add inverse event at the head
-    events = [%MonitorEvent{status: first_event_status(events, monitor, start_time), inserted_at: start_time} | events]
+    events = [%MonitorEvent{status: first_event_status(monitor, start_time), inserted_at: start_time} | events]
 
     downtime = downtime_for(events)
     (100 * (duration - downtime) / duration) |> Float.round(3) # uptime percentage
@@ -79,7 +79,7 @@ defmodule Webmonitor.UptimeCalculator do
 
   # if there are no events in our interval, we need to use the status
   # of the latest event before start time
-  defp first_event_status([], monitor, start_time) do
+  defp first_event_status(monitor, start_time) do
     event = Repo.one(from me in MonitorEvent,
      where: me.monitor_id == ^monitor.id and me.inserted_at <= ^start_time,
      order_by: [desc: :inserted_at],
@@ -89,12 +89,6 @@ defmodule Webmonitor.UptimeCalculator do
       event -> event.status
     end
   end
-  defp first_event_status([first_event | _], _monitor, _start_time) do
-    inverse_status(first_event.status)
-  end
-
-  defp inverse_status(:up), do: :down
-  defp inverse_status(:down), do: :up
 
   defp now, do: Ecto.DateTime.utc
   defp days_ago(days, offset \\ now) do
