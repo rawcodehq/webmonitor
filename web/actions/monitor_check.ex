@@ -20,14 +20,14 @@ defmodule Webmonitor.MonitorCheck do
       {:ok, stats} ->
         Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time}ms")
         # send a message if monitor was previously DOWN
-        if monitor.status != :up do
+        if monitor.status != :up || Repo.Monitors.first_event?(monitor) do
           send_up_notification(monitor)
           Webmonitor.UpdateMonitorStatusAction.update(monitor, :up)
         end
         Repo.insert %MonitorStat{response_time_ms: stats.response_time, monitor_id: monitor.id}
       {:error, reason} ->
         Logger.debug("monitor #{monitor.id} is down")
-        if monitor.status != :down do
+        if monitor.status != :down || Repo.Monitors.first_event?(monitor) do
           # send a message if monitor was previously UP
           send_down_notification(monitor, reason)
           Webmonitor.UpdateMonitorStatusAction.update(monitor, :down, reason)

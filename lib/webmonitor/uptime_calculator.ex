@@ -21,6 +21,18 @@ defmodule Webmonitor.UptimeCalculator do
 
   alias Webmonitor.{Repo, Monitor, MonitorEvent}
 
+  defmodule Uptime do
+    defstruct [:day, :week, :month]
+  end
+
+  def uptime_aggregate(%Monitor{}=monitor) do
+    %Uptime{
+      day: uptime(monitor, :day),
+      week: uptime(monitor, :week),
+      month: uptime(monitor, :month),
+    }
+  end
+
   def uptime(%Monitor{} = monitor, :day) do
     uptime(monitor, days_ago(1), now)
   end

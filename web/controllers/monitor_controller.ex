@@ -41,7 +41,10 @@ defmodule Webmonitor.MonitorController do
     monitor = Repo.get!(Monitor, id)
     # TODO: find a way to get it in this order via monitor.events
     events = Repo.all(from e in MonitorEvent, where: e.monitor_id == ^monitor.id, order_by: [desc: :id])
-    render(conn, "show.html", monitor: monitor, events: events)
+    render(conn,
+     monitor: monitor,
+     events: events,
+     uptime: Webmonitor.UptimeCalculator.uptime_aggregate(monitor))
   end
 
   def edit(conn, %{"id" => id}) do

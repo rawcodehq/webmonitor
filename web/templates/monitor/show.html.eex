@@ -7,7 +7,9 @@
 
 <h3>Uptime</h3>
 <p>
-  Last 24 hours: <%=  %>
+  Last 24 hours: <%= @uptime.day  %>
+  Last 7 days: <%= @uptime.week  %>
+  Last month: <%= @uptime.month  %>
 </p>
 
 <h2>Events</h2>

@@ -1,6 +1,6 @@
 defmodule Webmonitor.Repo do
   use Ecto.Repo, otp_app: :webmonitor
-  alias Webmonitor.{Repo,User,Monitor}
+  alias Webmonitor.{Repo,User,Monitor,MonitorEvent}
   require Ecto.Query
   import Ecto.Query, only: [from: 2]
 
@@ -22,5 +22,11 @@ defmodule Webmonitor.Repo do
       query = from m in Monitor, where: m.id == ^id and m.user_id == ^user_id
       Repo.one(query)
     end
+
+    def first_event?(monitor) do
+      count = Repo.one(from me in MonitorEvent, where: me.monitor_id == ^monitor.id, select: count(1))
+      count == 0
+    end
+
   end
 end
