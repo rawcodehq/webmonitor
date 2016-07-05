@@ -90,5 +90,12 @@ Algorithm to calculate downtime
 4 d0 u d u d u ue
 
 
+2. [] prev event was UP
+3. [ue]
+4. [u0, ue]
+5. 0 downtime
 
-
+2. [] prev event was DOWN
+3. [ue]
+4. [d0, ue]
+5. 100% downtime
