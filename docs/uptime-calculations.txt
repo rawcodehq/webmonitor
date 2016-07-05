@@ -66,6 +66,24 @@ Wrong formula
   down up
 >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 
+Algorithm to calculate downtime
+  1. Decide the duration (24 hours, 7 days, 30 days)
+  2. Select all the events in that duration
+  3. Add an UP event at the end of the duration
+  4. Add a inverse of the first event at the beginning of this duration
+    e.g. if the first event is an UP add a DOWN and vice versa
+  5. Start from the first UP event after a DOWN event and subtract the DOWN event_at from the UP event_at, do this till you reach the end.
+      This gives you the downtime
+  6. Subtract duration from downtime to get uptime duration
+    e.g.
+      1. 24 hour duration. Current Time is 00hours
+      2. UPat1 DOWNat5 UPat10
+      3. UPat1 DOWNat5 UPat10 UPat24
+      4. DOWNat0 UPat1 DOWNat5 UPat10 UPat24
+      5. UPat1 - DOWNat0 + UPat10 - DOWNat5
+        Downtime = 1 + 5
+      6. 24 - 6 => 18
+
 1 u0 d u d u d de
 2 u0 d u d u ue
 3 d0 u d u d de
