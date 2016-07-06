@@ -12,6 +12,18 @@ defmodule Webmonitor.Checker do
 
   @spec ping(binary) :: {atom, binary | Stats.t}
   def ping(url) when is_binary(url) do
+    case get(url) do
+      {:ok, _} = response -> response
+      {:error, _} = response ->
+        if are_we_down? do
+          {:our_network_is_down, response}
+        else
+          response
+        end
+    end
+  end
+
+  defp get(url) when is_binary(url) do
     Logger.debug("PINGING #{url}")
     {microseconds, response} = :timer.tc(HTTPoison, :get, [url])
     case response do
@@ -25,4 +37,9 @@ defmodule Webmonitor.Checker do
         {:error, "Unknown error #{inspect(oops)}"}
     end
   end
+
+  defp are_we_down? do
+    match?({:ok, _}, :inet_res.getbyname('google.com', :a))
+  end
+
 end

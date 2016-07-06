@@ -29,8 +29,8 @@
   + Remove updated_at from MonitorEvent
   + WONTFIX: Change inserted_at in MonitorEvent to event_at
   + WONTFIX: Merge Checker.Stats with MonitorStat
+  + Perform a check to make sure that we are up before notifying that a monitor is down
 
-  - Perform a check to make sure that we are up before notifying that a monitor is down
   - Perform a second check if site monitor goes down before notifying
   - Should show response time in a nice bar graph using D3
   - Should show response time aggregate data

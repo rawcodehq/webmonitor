@@ -25,6 +25,8 @@ defmodule Webmonitor.MonitorCheck do
           Webmonitor.UpdateMonitorStatusAction.update(monitor, :up)
         end
         Repo.insert %MonitorStat{response_time_ms: stats.response_time, monitor_id: monitor.id}
+      {:our_is_network_down, response} ->
+        Logger.error("OUR_NETWORK_IS_DOWN", response)
       {:error, reason} ->
         Logger.debug("monitor #{monitor.id} is down")
         if monitor.status != :down || Repo.Monitors.first_event?(monitor) do
