@@ -39,7 +39,7 @@ defmodule Webmonitor.Checker do
   end
 
   defp are_we_down? do
-    match?({:ok, _}, :inet_res.getbyname('google.com', :a))
+    !match?({:ok, _}, :inet_res.getbyname('google.com', :a))
   end
 
 end
