@@ -6,7 +6,7 @@ defmodule Webmonitor.MonitorEvent do
     field :reason, :string
     belongs_to :monitor, Webmonitor.Monitor
 
-    timestamps()
+    timestamps(updated_at: false)
   end
 
   @doc """
