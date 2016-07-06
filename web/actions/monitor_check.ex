@@ -18,7 +18,7 @@ defmodule Webmonitor.MonitorCheck do
     Logger.debug "checking monitor #{monitor.url} [#{monitor.id}]"
     case Checker.ping(monitor.url) do
       {:ok, stats} ->
-        Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time}ms")
+        Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time_ms}ms")
         # send a message if monitor was previously DOWN
         if monitor.status != :up || Repo.Monitors.first_event?(monitor) do
           send_up_notification(monitor)

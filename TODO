@@ -21,37 +21,34 @@
   + Use full email Webmonitor Support <noreply@..>
   + Make status an enum
   + Show current status of monitors
-
   + Should record events like UP and DOWN
   + Format times according to the user's timezone
   + Should show the event's reason if it is a DOWN event
   + Should record stats like response time
   + Should show uptime for the last 24 hours, 7 days, 1 month
-
-  - Remove updated_at from MonitorEvent
-  - Change inserted_at in MonitorEvent to event_at
-  - Merge Checker.Stats with MonitorStat
-
+  + Remove updated_at from MonitorEvent
+  + WONTFIX: Change inserted_at in MonitorEvent to event_at
+  + WONTFIX: Merge Checker.Stats with MonitorStat
 
   - Perform a check to make sure that we are up before notifying that a monitor is down
   - Perform a second check if site monitor goes down before notifying
-
-  - Should show response time in a nice bar graph
+  - Should show response time in a nice bar graph using D3
   - Should show response time aggregate data
+  - Make the app look pretty :)
+  - Setup SSL on the production server using Lets Encrypt
+  - Setup firewall on the server
+  - Automate deployment using a script or edeliver or relisa
 
 - - -
 
-  - Should record stats like response time across different servers
   - Format the errors properly
-
+  - Should allow changing the check time from 1 minute to 5 minutes
+  - Should record stats like response time across different servers
   - Allow a remote server to form a symbiotic relationship with other servers
     say we have 2 servers: A and B
       - Use Phoenix Channels for communication
       - A should be able to use B's server to verify when there is a downtime and B A's server
 
-  - Setup SSL on the production server using Lets Encrypt
-  - Setup firewall on the server
-  - Automate deployment using a script or edeliver or relisa
 
   - Should test a website from multiple locations if it goes down.
 

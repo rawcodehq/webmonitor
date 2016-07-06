@@ -22,6 +22,7 @@ defmodule Webmonitor.UptimeCalculator do
   alias Webmonitor.{Repo, Monitor, MonitorEvent}
 
   defmodule Uptime do
+    @type t :: %Webmonitor.UptimeCalculator.Uptime{day: float, week: float, month: float}
     defstruct [:day, :week, :month]
   end
 
