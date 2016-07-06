@@ -26,11 +26,12 @@
   + Format times according to the user's timezone
   + Should show the event's reason if it is a DOWN event
   + Should record stats like response time
-
   + Should show uptime for the last 24 hours, 7 days, 1 month
+
   - Remove updated_at from MonitorEvent
   - Change inserted_at in MonitorEvent to event_at
   - Merge Checker.Stats with MonitorStat
+
 
   - Perform a check to make sure that we are up before notifying that a monitor is down
   - Perform a second check if site monitor goes down before notifying
