@@ -9,8 +9,8 @@ defmodule Webmonitor.CheckerTest do
   end
 
   test "ping returns the response time in milliseconds" do
-    {:ok, %Stats{response_time: response_time}} = ping("http://httpstat.us/200")
-    assert response_time > 50
+    {:ok, %Stats{response_time_ms: response_time_ms}} = ping("http://httpstat.us/200")
+    assert response_time_ms > 50
   end
 
   test "ping returns :error when website returns a redirect" do

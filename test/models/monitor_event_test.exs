@@ -3,7 +3,7 @@ defmodule Webmonitor.MonitorEventTest do
 
   alias Webmonitor.MonitorEvent
 
-  @valid_attrs %{status: 42}
+  @valid_attrs %{status: :up}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do

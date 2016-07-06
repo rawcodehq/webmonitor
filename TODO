@@ -30,14 +30,14 @@
   + WONTFIX: Change inserted_at in MonitorEvent to event_at
   + WONTFIX: Merge Checker.Stats with MonitorStat
   + Perform a check to make sure that we are up before notifying that a monitor is down
+  + Setup firewall on the server
 
-  - Perform a second check if site monitor goes down before notifying
+  - Automate deployment using a script or edeliver or relisa
+  - Setup SSL on the production server using Lets Encrypt, with auto renew
   - Should show response time in a nice bar graph using D3
   - Should show response time aggregate data
   - Make the app look pretty :)
-  - Setup SSL on the production server using Lets Encrypt
-  - Setup firewall on the server
-  - Automate deployment using a script or edeliver or relisa
+  - Perform a second check from a different server if site monitor goes down before notifying
 
 - - -
 
