@@ -3,7 +3,7 @@ defmodule Webmonitor.Mixfile do
 
   def project do
     [app: :webmonitor,
-     version: "0.0.1",
+     version: "0.0.1-#{git_commit_sha}",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix, :gettext] ++ Mix.compilers,
@@ -69,4 +69,10 @@ defmodule Webmonitor.Mixfile do
       "test": ["ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
+
+  defp git_commit_sha do
+    {sha, 0} = System.cmd("git", ["log", "-1", "--format=%h"])
+    String.strip(sha)
+  end
+
 end
