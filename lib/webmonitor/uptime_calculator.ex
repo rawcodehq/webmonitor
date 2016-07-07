@@ -69,10 +69,12 @@ defmodule Webmonitor.UptimeCalculator do
       # skip the first loop
       # if previous event is a down event, we need to
       # subtract it from the current event which should be up
-      if prev != :first && prev.status == :down do
-        :up = curr.status # assert that the current event is up
-        downtime = downtime + Timex.diff(curr.inserted_at |> to_timex, prev.inserted_at |> to_timex, :seconds)
-      end
+      downtime = if prev != :first && prev.status == :down do
+                  :up = curr.status # assert that the current event is up
+                  downtime + Timex.diff(curr.inserted_at |> to_timex, prev.inserted_at |> to_timex, :seconds)
+                else
+                  downtime
+                end
 
       {curr, downtime}
     end)
