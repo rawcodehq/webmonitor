@@ -20,14 +20,15 @@ run() {
 build() {
   # build the release
   echo "building release for version $CURRENT_VERSION ..."
-  run "MIX_ENV=prod mix compile phoenix.digest"
-  run "MIX_ENV=prod mix release"
+  run "MIX_ENV=prod mix do clean, release.clean, compile, phoenix.digest, release"
 }
 
 init(){
   # init code
-  build
   echo "initializing remote code"
+  echo "implode release"
+  run "mix release.clean --implode --no-confirm"
+  build
   echo "copying tarball"
   run "scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}"
 
