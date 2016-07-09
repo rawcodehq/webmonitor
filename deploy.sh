@@ -20,7 +20,6 @@ run() {
 build() {
   # build the release
   echo "building release for version $CURRENT_VERSION ..."
-  run "MIX_ENV=prod mix clean --implode"
   run "MIX_ENV=prod mix compile phoenix.digest"
   run "MIX_ENV=prod mix release"
 }
