@@ -17,9 +17,9 @@ build() {
 # local --------------------
 # build the release
 echo "building release for version $CURRENT_VERSION ..."
-MIX_ENV=prod mix clean --implode &>> ./build.log
-MIX_ENV=prod mix compile phoenix.digest &>> ./build.log
-MIX_ENV=prod mix release &>> ./build.log
+MIX_ENV=prod mix clean --implode 2>&1 >> ./build.log
+MIX_ENV=prod mix compile phoenix.digest 2>&1 >> ./build.log
+MIX_ENV=prod mix release 2>&1 >> ./build.log
 }
 
 init(){
@@ -66,6 +66,7 @@ mkdir -p $SERVER_ROOT/releases/$CURRENT_VERSION
 mv $SERVER_TMP_FILENAME $SERVER_ROOT/releases/$CURRENT_VERSION/$APP_NAME.tar.gz
 # start the app
 cd $SERVER_ROOT
+source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true bin/$APP_NAME command Elixir.Release.Tasks migrate
 bin/$APP_NAME upgrade $CURRENT_VERSION
 # make sure it is up by running ping
 bin/$APP_NAME ping
@@ -92,8 +93,3 @@ case $1 in
   * )
     help
 esac
-
-exit
-
-# remote --------------------
-# TODO: run migrations if needed
