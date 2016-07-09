@@ -87,7 +87,7 @@ help(){
   echo 'Elixir Deployer'
   echo 'Usage:'
   echo './deploy.sh init'
-  echo './deploy.sh deploy'
+  echo './deploy.sh upgrade'
 }
 
 case $1 in
