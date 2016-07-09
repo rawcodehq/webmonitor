@@ -13,18 +13,13 @@ SERVER_TMP_FILENAME="$SERVER_HOME/$APP_NAME-$CURRENT_VERSION.tar.gz"
 RELEASE_TAR="./rel/$APP_NAME/releases/$CURRENT_VERSION/$APP_NAME.tar.gz"
 
 # helpers --------------------
-run() {
-  echo "local: $@"
-  /bin/bash -c "$@"
-}
-
 build() {
 # local --------------------
 # build the release
 echo "building release for version $CURRENT_VERSION ..."
-run "MIX_ENV=prod mix clean --implode"
-run "MIX_ENV=prod mix compile phoenix.digest"
-run "MIX_ENV=prod mix release"
+MIX_ENV=prod mix clean --implode &>> ./build.log
+MIX_ENV=prod mix compile phoenix.digest &>> ./build.log
+MIX_ENV=prod mix release &>> ./build.log
 }
 
 init(){
@@ -32,26 +27,22 @@ init(){
   build
   echo "initializing remote code"
   echo "copying tarball"
-  run "scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}"
+  scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}
 
 cat <<EOS | ssh -T "$APP_NAME@$SERVER_HOST" 'cat - > /tmp/deploy.sh; /bin/bash -l /tmp/deploy.sh'
 #!/bin/bash
 
 set -e # fail on first error
 # code that runs on the server
-run() {
-  echo "remote: \$@ ..."
-  /bin/bash -c "\$@"
-}
 # create the app directory
-run "mkdir -p $SERVER_ROOT"
+mkdir -p $SERVER_ROOT
 # copy the first version of the code
 cd $SERVER_ROOT
-run "tar -xvf $SERVER_TMP_FILENAME"
+tar -xvf $SERVER_TMP_FILENAME
 # start the app
-run "bin/$APP_NAME start"
+bin/$APP_NAME start
 # make sure it is up by running ping
-run "bin/$APP_NAME ping"
+bin/$APP_NAME ping
 EOS
   # TODO: create the systemctl file
 }
@@ -61,25 +52,23 @@ upgrade(){
   # upgrade code
   echo "upgrading remote code"
   echo "copying tarball"
-  run "scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}"
+  echo "scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}"
+  scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}
 
+  echo "running the upgrade script"
 cat <<EOS | ssh -T "$APP_NAME@$SERVER_HOST" 'cat - > /tmp/deploy.sh; /bin/bash -l /tmp/deploy.sh'
 #!/bin/bash
 
 set -e # fail on first error
 # code that runs on the server
-run() {
-  echo "remote: \$@ ..."
-  /bin/bash -c "\$@"
-}
 # copy the first version of the code
-run "mkdir -p $SERVER_ROOT/releases/$CURRENT_VERSION"
-run "mv $SERVER_TMP_FILENAME $SERVER_ROOT/releases/$CURRENT_VERSION/$APP_NAME.tar.gz"
+mkdir -p $SERVER_ROOT/releases/$CURRENT_VERSION
+mv $SERVER_TMP_FILENAME $SERVER_ROOT/releases/$CURRENT_VERSION/$APP_NAME.tar.gz
 # start the app
 cd $SERVER_ROOT
-run "bin/$APP_NAME upgrade $CURRENT_VERSION"
+bin/$APP_NAME upgrade $CURRENT_VERSION
 # make sure it is up by running ping
-run "bin/$APP_NAME ping"
+bin/$APP_NAME ping
 EOS
 }
 
