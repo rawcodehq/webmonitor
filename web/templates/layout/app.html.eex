@@ -14,7 +14,7 @@
   <body>
     <div class="container">
       <h1>
-        webmonitor
+        webmonitor | monitor all your websites / web applications!
       </h1>
 
       <%= if user_signed_in?(@conn) do %>

@@ -77,7 +77,7 @@ run "mkdir -p $SERVER_ROOT/releases/$CURRENT_VERSION"
 run "mv $SERVER_TMP_FILENAME $SERVER_ROOT/releases/$CURRENT_VERSION/$APP_NAME.tar.gz"
 # start the app
 cd $SERVER_ROOT
-run "source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true bin/$APP_NAME command Elixir.Release.Tasks migrate"
+#run "source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true bin/$APP_NAME rpc Elixir.Release.Tasks migrate"
 run "bin/$APP_NAME upgrade $CURRENT_VERSION"
 # make sure it is up by running ping
 run "bin/$APP_NAME ping"
