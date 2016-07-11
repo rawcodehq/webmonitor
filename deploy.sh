@@ -63,7 +63,7 @@ upgrade(){
   run "scp ${RELEASE_TAR} ${APP_NAME}@${SERVER_HOST}:${SERVER_TMP_FILENAME}"
 
   echo "running the upgrade script"
-cat <<EOS | ssh -T "$APP_NAME@$SERVER_HOST"
+cat <<EOS | ssh -T "$APP_NAME@$SERVER_HOST" 'cat - > /tmp/deploy.sh; /bin/bash -l /tmp/deploy.sh'
 #!/bin/bash
 
 set -e # fail on first error
@@ -78,7 +78,8 @@ run "mv $SERVER_TMP_FILENAME $SERVER_ROOT/releases/$CURRENT_VERSION/$APP_NAME.ta
 # start the app
 cd $SERVER_ROOT
 #run "source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true bin/$APP_NAME rpc Elixir.Release.Tasks migrate"
-run "source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true bin/$APP_NAME upgrade $CURRENT_VERSION"
+run "bin/$APP_NAME upgrade $CURRENT_VERSION"
+run "bin/$APP_NAME reboot" # TODO: temporary fix
 # make sure it is up by running ping
 run "bin/$APP_NAME ping"
 EOS
