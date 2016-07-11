@@ -79,6 +79,7 @@ run "mv $SERVER_TMP_FILENAME $SERVER_ROOT/releases/$CURRENT_VERSION/$APP_NAME.ta
 cd $SERVER_ROOT
 #run "source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true bin/$APP_NAME rpc Elixir.Release.Tasks migrate"
 run "bin/$APP_NAME upgrade $CURRENT_VERSION"
+run "bin/$APP_NAME reboot" # TODO: temporary fix
 # make sure it is up by running ping
 run "bin/$APP_NAME ping"
 EOS
