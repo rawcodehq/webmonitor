@@ -4,14 +4,14 @@ defmodule Webmonitor.AgentChecker do
   @agents Application.get_env(:webmonitor, :agents)
   def check(url) do
     agent = random_agent
-    Logger.debug("CHECKING #{url} using #{agent}")
+    Logger.debug("CHECKING '#{url}' using '#{agent}'")
     case HTTPoison.get(agent_url(agent, url))  do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         parse_response_json(body)
       {:error, %HTTPoison.Error{reason: reason}} ->
-        {:unknown, reason}
+        {:error, reason}
       oops ->
-        {:unknown, "Unknown error #{inspect(oops)}"}
+        {:error, "Unknown error #{inspect(oops)}"}
     end
   end
 

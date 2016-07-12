@@ -25,11 +25,19 @@ defmodule Webmonitor.MonitorCheck do
     end
   end
 
+  # this is triggered only when the monitor is down
+  # TODO: what happens if our agent is also down?
+  # we'd get false positives because of the :unknown
   defp perform_agent_check(monitor) do
     case AgentChecker.check(monitor.url) do
       {:ok, stats} -> handle_up(monitor, stats)
       {:down, reason} -> handle_down(monitor, reason)
-      {:unknown, response} -> Logger.error("OUR_NETWORK_IS_DOWN #{inspect(response)}")
+      {:error, response} ->
+        Logger.error("ERROR #{inspect(response)}")
+        # TODO: should we make the monitor down?
+      {:unknown, response} ->
+        # TODO: should we make the monitor down?
+        Logger.error("OUR_NETWORK_IS_DOWN #{inspect(response)}")
     end
   end
 
