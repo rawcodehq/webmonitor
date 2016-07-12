@@ -4,7 +4,7 @@ defmodule Webmonitor.MonitorCheck do
   """
 
   require Logger
-  alias Webmonitor.{Repo,SiteNotification,Monitor,Mailer,Checker, MonitorStat}
+  alias Webmonitor.{Repo,SiteNotification,Monitor,Mailer,Checker, MonitorStat, AgentChecker}
 
   def check_all do
     monitors =  Repo.all(Monitor)
@@ -17,24 +17,39 @@ defmodule Webmonitor.MonitorCheck do
   def check(monitor) do
     Logger.debug "checking monitor #{monitor.url} [#{monitor.id}]"
     case Checker.ping(monitor.url) do
-      {:ok, stats} ->
-        Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time_ms}ms")
-        # send a message if monitor was previously DOWN
-        if monitor.status != :up || Repo.Monitors.first_event?(monitor) do
-          send_up_notification(monitor)
-          Webmonitor.UpdateMonitorStatusAction.update(monitor, :up)
-        end
-        Repo.insert %MonitorStat{response_time_ms: stats.response_time_ms, monitor_id: monitor.id}
-      {:our_network_is_down, response} ->
-        Logger.error("OUR_NETWORK_IS_DOWN #{inspect(response)}")
+      {:ok, stats} -> handle_up(monitor, stats)
+      {:our_network_is_down, response} -> Logger.error("OUR_NETWORK_IS_DOWN #{inspect(response)}")
       {:error, reason} ->
-        Logger.debug("monitor #{monitor.id} is down")
-        if monitor.status != :down || Repo.Monitors.first_event?(monitor) do
-          # send a message if monitor was previously UP
-          send_down_notification(monitor, reason)
-          Webmonitor.UpdateMonitorStatusAction.update(monitor, :down, reason)
-        end
+        Logger.debug("Monitor #{monitor.id} is down with error: #{inspect(reason)}, performing agent check")
+        perform_agent_check(monitor)
     end
+  end
+
+  defp perform_agent_check(monitor) do
+    case AgentChecker.check(monitor.url) do
+      {:ok, stats} -> handle_up(monitor, stats)
+      {:down, reason} -> handle_down(monitor, reason)
+      {:unknown, response} -> Logger.error("OUR_NETWORK_IS_DOWN #{inspect(response)}")
+    end
+  end
+
+  defp handle_down(monitor, reason) do
+    Logger.debug("monitor #{monitor.id} is down")
+    if monitor.status != :down || Repo.Monitors.first_event?(monitor) do
+      # send a message if monitor was previously UP
+      send_down_notification(monitor, reason)
+      Webmonitor.UpdateMonitorStatusAction.update(monitor, :down, reason)
+    end
+  end
+
+  defp handle_up(monitor, stats) do
+    Logger.debug("monitor #{monitor.id} is up, response time is #{stats.response_time_ms}ms")
+    # send a message if monitor was previously DOWN
+    if monitor.status != :up || Repo.Monitors.first_event?(monitor) do
+      send_up_notification(monitor)
+      Webmonitor.UpdateMonitorStatusAction.update(monitor, :up)
+    end
+    Repo.insert %MonitorStat{response_time_ms: stats.response_time_ms, monitor_id: monitor.id}
   end
 
   defp send_up_notification(monitor) do

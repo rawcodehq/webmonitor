@@ -61,3 +61,7 @@ config :webmonitor, Webmonitor.Repo,
   password: "${PG_PASSWORD}",
   database: "webmonitor_prod",
   pool_size: 20
+
+config :webmonitor,
+  # agents
+  agents: ["http://a1.webmonitorhq.com"]
