@@ -19,7 +19,8 @@ defmodule Webmonitor.Mixfile do
   def application do
     [mod: {Webmonitor, []},
      applications: [:phoenix, :phoenix_html, :cowboy, :logger, :gettext,
-      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin, :phoenix_pubsub, :tzdata, :timex, :timex_ecto]]
+      :phoenix_ecto, :postgrex, :httpoison, :bamboo, :bamboo_smtp, :comeonin,
+      :phoenix_pubsub, :tzdata, :timex, :timex_ecto, :ex_aws]]
   end
 
   # Specifies which paths to compile per environment.
@@ -39,6 +40,7 @@ defmodule Webmonitor.Mixfile do
      {:cowboy, "~> 1.0"},
 
      {:timex, "~> 2.2"},
+     {:ex_aws, "1.0.0-beta0", github: "CargoSense/ex_aws"},
      {:timex_ecto, "~> 1.1"},
      {:comeonin, "~> 2.4"},
      {:httpoison, "~> 0.8.0"},

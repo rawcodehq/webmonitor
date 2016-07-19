@@ -33,6 +33,8 @@
   + Setup firewall on the server
   + Automate deployment using a script or edeliver or relisa
 
+  - Use AWS lambda to perform a second check if the site monitor goes down
+
   - Perform a second check from a different server if site monitor goes down before notifying
 
   - Setup SSL on the production server using Lets Encrypt, with auto renew
