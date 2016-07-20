@@ -21,7 +21,7 @@ defmodule Webmonitor.AgentChecker do
     end
   end
 
-  # TODO: test the followin
+  # TODO: test the following
   # connection error
   # SSL error
   # incorrect status code

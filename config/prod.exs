@@ -40,28 +40,24 @@ config :phoenix, :serve_endpoints, true
 
 config :webmonitor, Webmonitor.Mailer,
   adapter: Bamboo.SMTPAdapter,
-  server: "${WM_SMTP_SERVER}",
+  server: {:system, "WM_SMTP_SERVER"},
   port: 465,
   #tls: :always,
   ssl: true,
   retries: 1,
-  username: "${WM_SMTP_USERNAME}",
-  password: "${WM_SMTP_PASSWORD}"
+  username: {:system, "WM_SMTP_USERNAME"},
+  password: {:system, "WM_SMTP_PASSWORD"}
 
 # In this file, we keep production configuration that
 # you likely want to automate and keep it away from
 # your version control system.
 config :webmonitor, Webmonitor.Endpoint,
-  secret_key_base: "${SECRET_KEY_BASE}"
+  secret_key_base: {:system, "SECRET_KEY_BASE"}
 
 # Configure your database
 config :webmonitor, Webmonitor.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "${PG_USER}",
-  password: "${PG_PASSWORD}",
+  username: {:system, "PG_USER"},
+  password: {:system, "PG_PASSWORD"},
   database: "webmonitor_prod",
   pool_size: 20
-
-config :webmonitor,
-  # agents
-  agents: ["http://a1.webmonitorhq.com"]
