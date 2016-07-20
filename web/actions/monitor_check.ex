@@ -30,7 +30,7 @@ defmodule Webmonitor.MonitorCheck do
   # we'd get false positives because of the :unknown
   defp perform_agent_check(monitor) do
     case AgentChecker.check(monitor.url) do
-      {:ok, stats} -> handle_up(monitor, stats)
+      {:up, stats} -> handle_up(monitor, stats)
       {:down, reason} -> handle_down(monitor, reason)
       {:error, response} ->
         Logger.error("ERROR #{inspect(response)}")

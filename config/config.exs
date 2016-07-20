@@ -36,10 +36,13 @@ config :webmonitor,
   # agents
   agents: ["http://localhost:8090"]
 
+# ex_aws
 config :ex_aws,
   access_key_id: [{:system, "AWS_ACCESS_KEY_ID"}, :instance_role],
   secret_access_key: [{:system, "AWS_SECRET_ACCESS_KEY"}, :instance_role],
   region: "us-east-1"
+config :ex_aws, :httpoison_opts,
+  recv_timeout: 40_000 # our tasks have a timeout of 30seconds, this is 10s more than that
 
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
