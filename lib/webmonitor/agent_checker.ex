@@ -27,7 +27,7 @@ defmodule Webmonitor.AgentChecker do
   # incorrect status code
   # dns error
   defp parse_response(%{"status" => 200, "response_time_ms" => response_time_ms}), do: {:up, %Stats{response_time_ms: response_time_ms}}
-  defp parse_response(%{"status" => status_code, "response_time_ms" => response_time_ms}) when is_number(status_code), do: {:down, "#{status_code} response"}
+  defp parse_response(%{"status" => status_code, "response_time_ms" => _response_time_ms}) when is_number(status_code), do: {:down, "#{status_code} response"}
   defp parse_response(%{"status" => "error", "error" => error}), do: {:error, error}
   defp parse_response(oops) do
     Logger.error("UNEXPECTED RESPONSE: #{inspect(oops)}")

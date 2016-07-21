@@ -34,6 +34,7 @@
   + Automate deployment using a script or edeliver or relisa
 
   - Use AWS lambda to perform a second check if the site monitor goes down
+  - Write tests for the AWS Lambda code
 
   - Perform a second check from a different server if site monitor goes down before notifying
 
