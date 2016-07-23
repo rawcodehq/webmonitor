@@ -14,7 +14,9 @@ defmodule Mix.Tasks.Lambda.Deploy do
     Mix.shell.info "DONE"
   end
 
+  require Logger
   defp exec(cmd, args) do
+    Mix.shell.info(inspect [cmd, args])
     {out, 0} = System.cmd(cmd, args)
     Mix.shell.info out
   end

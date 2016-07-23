@@ -2,7 +2,7 @@
   "name": "check_url",
   "version": "1.0.0",
   "description": "",
-  "main": "check_url.js",
+  "main": "index.js",
   "directories": {
     "test": "test"
   },
