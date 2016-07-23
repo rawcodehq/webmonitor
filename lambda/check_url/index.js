@@ -30,12 +30,24 @@ function request(url, responseCallback, errorCallback) {
 function formatErrorMessage(e){
   return "CODE: " + (e.code || "") + "|" +  "MESSAGE: " + (e.message || "");
 }
+
+var errors = {
+  'ECONNRESET': "connerr",
+  'CERT_HAS_EXPIRED': 'ssl_expired',
+}
+
 function translateHttpError(e){
   if (e.syscall === 'getaddrinfo' && e.code == 'ENOTFOUND') {
-    return {status: 'down', error: "Unable to resolve domain"};
+    return {status: 'down', error: "nxdomain"};
   }
 
-  return {status: 'down', error: 'UNKNOWN'}
+  var error = errors[e.code];
+  if (error) {
+    return {status: 'down', error: error};
+  }
+
+  console.log(e)
+  return {status: 'down', error: 'unknown'}
 }
 
 // helper function

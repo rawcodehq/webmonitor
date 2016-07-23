@@ -61,6 +61,7 @@ describe('handler', ()=>{
     index.handler({url: "http://mujjuisawesomeandzainabtoo"}, null, function(err, resp){
       assert.equal(err, null)
       assert.equal(resp.status, 'down')
+      assert.equal(resp.error, 'nxdomain')
       assert.equal(resp.response_time_ms > 0 && resp.response_time_ms < 1000, true)
       done()
     })
@@ -72,6 +73,27 @@ describe('handler', ()=>{
     index.handler({url: "http://httpstat.us:5033/"}, null, function(err, resp){
       assert.equal(err, null)
       assert.equal(resp.status, 'down')
+      assert.equal(resp.error, 'connerr')
+      assert.equal(resp.response_time_ms > 0 && resp.response_time_ms < 1.5 * 1000, true)
+      done()
+    })
+  })
+
+  it('ssl error shows down', (done) => {
+    index.handler({url: "https://expired.badssl.com/"}, null, function(err, resp){
+      assert.equal(err, null)
+      assert.equal(resp.status, 'down')
+      assert.equal(resp.error, 'ssl_expired')
+      assert.equal(resp.response_time_ms > 0 && resp.response_time_ms < 1.5 * 1000, true)
+      done()
+    })
+  })
+
+  it('any unknown ssl error is returned as down', (done) => {
+    index.handler({url: "https://untrusted-root.badssl.com/"}, null, function(err, resp){
+      assert.equal(err, null)
+      assert.equal(resp.status, 'down')
+      assert.equal(resp.error, 'unknown')
       assert.equal(resp.response_time_ms > 0 && resp.response_time_ms < 1.5 * 1000, true)
       done()
     })
