@@ -28,10 +28,14 @@ defmodule Webmonitor.AgentChecker do
   # dns error
   defp parse_response(%{"status" => 200, "response_time_ms" => response_time_ms}), do: {:up, %Stats{response_time_ms: response_time_ms}}
   defp parse_response(%{"status" => status_code, "response_time_ms" => _response_time_ms}) when is_number(status_code), do: {:down, "#{status_code} response"}
+  defp parse_response(%{"status" => "down", "response_time_ms" => _response_time_ms, message: message}) do
+    Logger.debug(message)
+    {:down, message}
+  end
   defp parse_response(%{"status" => "error", "error" => error}), do: {:error, error}
   defp parse_response(oops) do
     Logger.error("UNEXPECTED RESPONSE: #{inspect(oops)}")
-    {:error, "unexpected resposne"}
+    {:error, "unexpected response"}
   end
 
   defp invoke_lambda(url) do

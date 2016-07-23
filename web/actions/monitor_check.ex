@@ -35,9 +35,9 @@ defmodule Webmonitor.MonitorCheck do
       {:error, response} ->
         Logger.error("ERROR #{inspect(response)}")
         # TODO: should we make the monitor down?
-      {:unknown, response} ->
+      oops ->
         # TODO: should we make the monitor down?
-        Logger.error("OUR_NETWORK_IS_DOWN #{inspect(response)}")
+        Logger.error("UNHANDLED MESSAGE #{inspect(oops)}")
     end
   end
 
