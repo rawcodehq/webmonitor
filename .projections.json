@@ -1,0 +1,51 @@
+{
+  "web/channels/*_channel.ex": {
+    "type": "channel",
+    "alternate": "test/channels/{}_channel_test.exs"
+  },
+  "web/controllers/*_controller.ex": {
+    "type": "controller",
+    "alternate": "test/controllers/{}_controller_test.exs"
+  },
+  "web/views/*_view.ex": {
+    "type": "view",
+    "alternate": "test/views/{}_view_test.exs"
+  },
+  "web/models/*.ex": {
+    "type": "model",
+    "alternate": "test/models/{}_test.exs"
+  },
+  "test/channels/*_channel_test.exs": {
+    "alternate": "web/channels/{}_channel.ex"
+  },
+  "test/controllers/*_controller_test.exs": {
+    "alternate": "web/controllers/{}_controller.ex"
+  },
+  "test/views/*_view_test.exs": {
+    "alternate": "web/views/{}_view.ex"
+  },
+  "test/models/*_test.exs": {
+    "alternate": "web/models/{}.ex"
+  },
+  "web/templates/*.html.exs": {
+    "type": "template"
+  },
+  "web/router.ex": {
+    "type": "router"
+  },
+  "web/static/css/*": {
+    "type": "stylesheet"
+  },
+  "web/static/js/*": {
+    "type": "javascript"
+  },
+  "config/*.exs": {
+    "type": "config"
+  },
+  "lib/*": {
+    "type": "lib"
+  },
+  "priv/repo/migrations/*.exs": {
+    "type": "migration"
+  }
+}
