@@ -1,0 +1,19 @@
+{
+  "name": "check_url",
+  "version": "1.0.0",
+  "description": "",
+  "main": "check_url.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "NODE_ENV=test mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "aws-lambda-mock-context": "^3.0.0",
+    "chai": "^3.5.0",
+    "mocha": "^2.5.3"
+  }
+}

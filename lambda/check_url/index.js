@@ -1,5 +1,3 @@
-//console.log('Loading function');
-
 var adapterFor = (function() {
   var url = require('url'),
     adapters = {
@@ -12,7 +10,7 @@ var adapterFor = (function() {
   };
 }());
 
-var timeoutMS = 30 * 1000;
+var timeoutMS = process.env.NODE_ENV === "test" ? 1 * 1000 : 10 * 1000;
 
 function request(url, responseCallback, errorCallback) {
   var adapter = adapterFor(url),
@@ -27,6 +25,17 @@ function request(url, responseCallback, errorCallback) {
 
   req.end();
   return req;
+}
+
+function formatErrorMessage(e){
+  return "CODE: " + (e.code || "") + "|" +  "MESSAGE: " + (e.message || "");
+}
+function translateHttpError(e){
+  if (e.syscall === 'getaddrinfo' && e.code == 'ENOTFOUND') {
+    return {status: 'down', error: "Unable to resolve domain"};
+  }
+
+  return {status: 'down', error: 'UNKNOWN'}
 }
 
 // helper function
@@ -57,10 +66,14 @@ function checkUrl(url, callback) {
 
     });
 
+    // error from the http lib
+    // most probably means the site is down
     req.on('error', function(e) {
+      var err = translateHttpError(e); // returns a {status: .., error: ..}
       callback({
-        status: "error",
-        error: e.code + "|" + e.message,
+        status: err.status,
+        error: err.error,
+        message: formatErrorMessage(e),
         response_time_ms: elapsedTime()
       })
     })
