@@ -5,8 +5,8 @@ defmodule Mix.Tasks.Lambda.Deploy do
   def run(function_name) do
 
     Mix.shell.info "zipping #{function_name}"
-    exec "rm", ~w[/tmp/#{function_name}.zip]
-    exec "zip", ~w[--junk-paths /tmp/#{function_name}.zip ./lambda/#{function_name}/#{function_name}.js]
+    exec "rm", ~w[-rf /tmp/#{function_name}.zip]
+    exec "zip", ~w[--junk-paths /tmp/#{function_name}.zip ./lambda/#{function_name}/index.js]
 
     Mix.shell.info "deploying #{function_name}"
     exec "aws", ~w[lambda update-function-code --function-name #{function_name} --zip-file fileb:///tmp/#{function_name}.zip]
