@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+APP="webmonitor"               # name of your release
+APP_ROOT="/opt/www/webmonitor"
+APP_USER="webmonitor"
+APP_HOST="webmonitorhq.com"
+
+BUILD_HOST="$APP_HOST"         # host where to build the release
+BUILD_USER="$APP_USER"         # local user at build host
+BUILD_AT="$APP_ROOT/builds"    # build directory on build host
+
+PRODUCTION_HOSTS="$APP_HOST"   # deploy / production hosts separated by space
+PRODUCTION_USER="$APP_USER"    # local user at deploy hosts
+DELIVER_TO="$APP_ROOT"         # deploy directory on production hosts
