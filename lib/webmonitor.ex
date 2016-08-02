@@ -4,6 +4,15 @@ defmodule Webmonitor do
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
+
+    # fix the config for our app
+    Config.configure([
+      {:ex_aws},
+      {:webmonitor, Webmonitor.Repo},
+      {:webmonitor, Webmonitor.Mailer},
+      {:webmonitor, Webmonitor.Endpoint},
+    ])
+
     import Supervisor.Spec, warn: false
 
     children = [
