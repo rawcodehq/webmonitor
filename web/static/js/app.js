@@ -12,6 +12,9 @@
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
 import "phoenix_html"
+import ujs from "./ujs"
+
+$(ujs) // call ujs on document.ready
 
 // Import local files
 //

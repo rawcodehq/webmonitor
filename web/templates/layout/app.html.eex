@@ -6,30 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <meta name="csrf" content="<%= Plug.CSRFProtection.get_csrf_token() %>">
 
     <title>Hello Webmonitor!</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <div class="container">
-      <h1>
-        webmonitor | monitor all your websites / web applications!
-      </h1>
 
-      <%= if user_signed_in?(@conn) do %>
-        <a href="/monitors" >Monitors</a>
-        |
-        <%= link "Sign Out", to: "/session", method: :delete %>
-      <% else %>
-        <a href="/session/new" >Sign In</a>
-        |
-        <a href="/registration/new" >Sign Up</a>
-      <% end %>
-      |
-      <%= if user_signed_in?(@conn) do %>
-        <a href="/user/edit" ><%= safe_get @current_user, :email  %></a>
-      <% end %>
+    <%= render "_nav.html", conn: @conn, current_user: @current_user %>
+
+    <div class="wm-main ui container">
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
@@ -43,6 +31,9 @@
     <div class="footer">
       <a href='http://webmonitorhq.com'>http://webmonitorhq.com</a> &copy; 2016
     </div>
+
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/semantic-ui/2.2.2/semantic.min.js" crossorigin="anonymous"></script>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>

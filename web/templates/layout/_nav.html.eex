@@ -1,0 +1,33 @@
+<div class="ui fixed menu">
+  <div class="ui container">
+
+    <a href="/" class="header item">
+      <%#<img class="logo" src="assets/images/logo.png">%>
+      Webmonitor
+    </a>
+
+    <%#left nav%>
+    <a href="/" class="item">Home</a>
+    <%= if user_signed_in?(@conn) do %>
+      <a href="/monitors" class=item>Monitors</a>
+    <% end %>
+    <%#left nav%>
+
+    <%#right nav%>
+    <div class="right menu">
+      <%= if user_signed_in?(@conn) do %>
+        <a href="/user/edit" class=item ><%= safe_get @current_user, :email  %></a>
+      <% end %>
+
+      <%= if user_signed_in?(@conn) do %>
+        <a href="/session" data-method='delete' class=item>Sign out</a>
+      <% else %>
+        <a href="/session/new" class=item >Sign In</a>
+        <a href="/registration/new" class=item >Sign Up</a>
+      <% end %>
+
+    </div>
+    <%#right nav%>
+
+  </div>
+</div>

@@ -35,8 +35,11 @@
   + Write tests for the AWS Lambda code
   + Perform a second check from a different server if site monitor goes down before notifying
   + Setup SSL on the production server using Lets Encrypt, with auto renew
+  + Use AWS lambda to perform a second check if the site monitor goes down
 
-  - Use AWS lambda to perform a second check if the site monitor goes down
+  - Fix CSS
+  - Flesh out the UI
+  - Login with Google
 
   - Fix algorithm bug causing a complete downtime to show only a <100% downtime?
     e.g. if I created a monitor 1 hour ago, the 24 hour downtime shows 1/24% whereas it should show 100%

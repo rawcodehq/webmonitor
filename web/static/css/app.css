@@ -1,11 +1,3 @@
-/* night theme start */
-body {
-  margin: 0;
-  background-color: #111;
-  color: #888;
+.wm-main{
+  margin-top: 50px;
 }
-
-body a {
-  color: #fff;
-}
-/* night theme end */
