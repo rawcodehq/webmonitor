@@ -10,10 +10,15 @@ defmodule Webmonitor.ErrorHelpers do
   """
   def error_tag(form, field) do
     if error = form.errors[field] do
-      content_tag :span, translate_error(error), class: "help-block"
+      content_tag :span, translate_error(error), class: "ui error"
     end
   end
 
+  def has_errors(form, field) do
+    if !!form.errors[field] do
+      "error"
+    end
+  end
 
   def translate_error({msg, opts}) do
     # Because error messages were defined within Ecto, we must
