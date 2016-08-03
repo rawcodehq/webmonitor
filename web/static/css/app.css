@@ -1,3 +1,9 @@
 .wm-main{
   margin-top: 50px;
+  min-height: 400px;
+}
+
+.wm-footer a {
+  color: white;
+  text-decoration: underline;
 }
