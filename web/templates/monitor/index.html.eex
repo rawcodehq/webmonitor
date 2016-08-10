@@ -1,13 +1,14 @@
-<h2>Listing monitors</h2>
+<h2 class="ui header">
+  Monitors
 
-<%= link "New monitor", to: monitor_path(@conn, :new) %>
+  <%= link "New Monitor", to: monitor_path(@conn, :new), class: "ui button large right floated" %>
+</h2>
 
-<table class="table">
-  <thead>
+<table class="ui celled compact table">
+  <thead class='full-width'>
     <tr>
       <th>Monitor</th>
       <th>Status</th>
-
       <th></th>
     </tr>
   </thead>
