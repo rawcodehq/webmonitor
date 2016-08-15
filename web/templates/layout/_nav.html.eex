@@ -10,6 +10,10 @@
     <a href="/" class="item">Home</a>
     <%= if user_signed_in?(@conn) do %>
       <a href="/monitors" class=item>Monitors</a>
+    <% else %>
+      <a href="/about" class=item>About</a>
+      <a href="/pricing" class=item>Pricing</a>
+      <a href="/faq" class=item>FAQ</a>
     <% end %>
     <%#left nav%>
 

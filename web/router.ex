@@ -23,6 +23,13 @@ defmodule Webmonitor.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+
+    require Logger
+    Enum.each(Webmonitor.StaticPages.static_pages, fn(page)->
+      Logger.debug inspect(["ROUTE: ", "/#{page}", page])
+      Phoenix.Router.get "/#{page}", StaticController, page, as: "#{page}_page"
+    end)
+
     resources "/registration", RegistrationController, only: [:new, :create], singleton: true
     resources "/session", SessionController, only: [:new, :create, :delete], singleton: true
   end
