@@ -1,1 +1,37 @@
-<h1>Pricing</h1>
+<div class='ui container'>
+  <h1>Pricing</h1>
+
+  <p>Sign up for a 14 day free trial of the Basic plan</p>
+
+  <table class="ui definition right aligned table">
+    <tbody>
+      <tr>
+        <td class="left aligned">Basic</td>
+        <td>10 monitors</td>
+        <td>1 minute frequency</td>
+        <td>$3 per month</td>
+        <td>
+          <a href="/registration/new?plan=basic" class="ui green small button">Sign Up</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="left aligned">Plus</td>
+        <td>20 monitors</td>
+        <td>1 minute frequency</td>
+        <td>$5 per month</td>
+        <td>
+          <a href="/registration/new?plan=plus" class="ui green small button">Sign Up</a>
+        </td>
+      </tr>
+      <tr>
+        <td class="left aligned">Pro</td>
+        <td>50 monitors</td>
+        <td>1 minute frequency</td>
+        <td>$15 per month</td>
+        <td>
+          <a href="/registration/new?plan=pro" class="ui green small button">Sign Up</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
