@@ -1,5 +1,6 @@
 defmodule Webmonitor.StaticController do
   use Webmonitor.Web, :controller
+  plug :put_layout, "public.html"
 
   # NOTE: Add entry to Webmonitor.StaticPages to add a page
 

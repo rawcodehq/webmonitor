@@ -1,0 +1,33 @@
+<div class="ui inverted vertical masthead center aligned segment">
+
+  <div class="ui text container">
+    <h1 class="ui inverted header">
+      Stuff Goes Bad
+    </h1>
+    <h2>Get alerts when your website goes down, Checked every single minute.</h2>
+    <a href="/registration/new" class="ui huge green button">Get Started Now <i class="right arrow icon"></i></a>
+  </div>
+
+</div>
+
+<div class="ui container" style='margin-top: 20px;'>
+  <h2>Features</h2>
+  <div class="ui segment">
+    <h3>1 Minute Checks</h3>
+    <p>
+      Know when your website goes down within a minute.
+    </p>
+  </div>
+  <div class="ui segment">
+    <h3>No False Positives</h3>
+    <p>
+      We check from 2 different locations if we think your site is down to avoid false positives.
+    </p>
+  </div>
+  <div class="ui segment">
+    <h3>Quick Email Alerts</h3>
+    <p>
+      Get notified via Email as soon as your website goes down.
+    </p>
+  </div>
+</div>
