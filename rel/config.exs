@@ -2,7 +2,7 @@ use Mix.Releases.Config,
     # This sets the default release built by `mix release`
     default_release: :default,
     # This sets the default environment used by `mix release`
-    default_environment: :prod
+    default_environment: :dev
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
@@ -16,11 +16,13 @@ use Mix.Releases.Config,
 environment :dev do
   set dev_mode: true
   set include_erts: false
+  set cookie: :".YD;dj7s@zGURV~TtcJQhc7P/?QLg*,?&j=z3xpiW;kLkmOCTS?G.KAtR`&dmo:~"
 end
 
 environment :prod do
-  set include_erts: true
+  set include_erts: false
   set include_src: false
+  set cookie: :".YD;dj7s@zGURV~TtcJQhc7P/?QLg*,?&j=z3xpiW;kLkmOCTS?G.KAtR`&dmo:~"
 end
 
 # You may define one or more releases in this file.
