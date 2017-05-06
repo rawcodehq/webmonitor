@@ -1,8 +1,16 @@
+# Import all plugins from `rel/plugins`
+# They can then be used by adding `plugin MyPlugin` to
+# either an environment, or release definition, where
+# `MyPlugin` is the name of the plugin module.
+Path.join(["rel", "plugins", "*.exs"])
+|> Path.wildcard()
+|> Enum.map(&Code.eval_file(&1))
+
 use Mix.Releases.Config,
     # This sets the default release built by `mix release`
     default_release: :default,
     # This sets the default environment used by `mix release`
-    default_environment: :dev
+    default_environment: Mix.env()
 
 # For a full list of config options for both releases
 # and environments, visit https://hexdocs.pm/distillery/configuration.html
@@ -16,13 +24,13 @@ use Mix.Releases.Config,
 environment :dev do
   set dev_mode: true
   set include_erts: false
-  set cookie: :".YD;dj7s@zGURV~TtcJQhc7P/?QLg*,?&j=z3xpiW;kLkmOCTS?G.KAtR`&dmo:~"
+  set cookie: :"K?}U}2|v)CSpb`>{~`x)sXj.`r;KQngAF)v}aeU%%92oxNK)dJ>1[R]d,i)XYY};"
 end
 
 environment :prod do
-  set include_erts: false
+  set include_erts: true
   set include_src: false
-  set cookie: :".YD;dj7s@zGURV~TtcJQhc7P/?QLg*,?&j=z3xpiW;kLkmOCTS?G.KAtR`&dmo:~"
+  set cookie: :"H>GFH|<0GZMd=.dbX,d~}A2X@whTSJ]&)W=)vdZGvzXk@>[$P@}{qUXX]vwxtTA}"
 end
 
 # You may define one or more releases in this file.
@@ -32,5 +40,8 @@ end
 
 release :webmonitor do
   set version: current_version(:webmonitor)
+  set applications: [
+    :runtime_tools
+  ]
 end
 
