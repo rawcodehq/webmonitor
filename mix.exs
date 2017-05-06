@@ -49,7 +49,7 @@ defmodule Webmonitor.Mixfile do
      {:bamboo_smtp, github: "fewlinesco/bamboo_smtp"},
 
      # deployment stuff
-     {:distillery, "~> 0.10.1"},
+     {:distillery, "~> 1.3"},
 
      # dev stuff
      {:phoenix_live_reload, "~> 1.0", only: :dev},
