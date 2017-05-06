@@ -1,3 +1,4 @@
 #!/bin/sh
-touch tmp/restart.txt
-echo "restarting Passenger app"
+rel/current/bin/webmonitor stop
+#rel/simple/bin/simple start
+#rel/simple/bin/simple upgrade

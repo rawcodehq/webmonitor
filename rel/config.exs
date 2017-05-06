@@ -43,5 +43,5 @@ release :webmonitor do
   set applications: [
     :runtime_tools
   ]
+  set output_dir: "rel/current"
 end
-
