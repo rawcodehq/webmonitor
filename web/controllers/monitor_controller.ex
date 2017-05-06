@@ -17,8 +17,10 @@ defmodule Webmonitor.MonitorController do
     render(conn, "new.html", changeset: changeset)
   end
 
+  # %{ "name" => "Test" }
   def create(conn, %{"monitor" => monitor_params}) do
     monitor_params = Map.put_new(monitor_params, "user_id", current_user_id(conn))
+  # %{ "name" => "Test", "user_id" => 5 }
     changeset = Monitor.changeset(%Monitor{}, monitor_params)
 
     case Repo.insert(changeset) do

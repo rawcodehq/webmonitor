@@ -63,8 +63,7 @@ defmodule Webmonitor.MonitorCheck do
   defp send_up_notification(monitor) do
     monitor = Repo.preload(monitor, :user)
     # send a notification
-    SiteNotification.up(monitor.user, monitor)
-    |> Mailer.deliver_now
+    SiteNotification.up(monitor.user, monitor) |> Mailer.deliver_now
   end
 
   defp send_down_notification(monitor, reason) do

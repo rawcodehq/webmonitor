@@ -1,27 +1,17 @@
-# NOTE: use `systemd-analyze verify config/webmonitor.service` to verify the syntax
-# put this file in /etc/systemd/system/
-# to start this process manually run `sudo systemctl start webmonitor.service`
-# to stop this process manually run `sudo systemctl stop webmonitor.service`
 [Unit]
-Description=Webmonitor Phoenix Web App
+Description=Webmonitor phoenix app
+After=network.target
 
 [Service]
-Type=simple
-User=webmonitor
-Group=webmonitor
-WorkingDirectory=/opt/www/webmonitor
-#Environment=PORT=4000
-#Environment=FOO=bar
-ExecStart=/bin/bash -lc 'source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true /opt/www/webmonitor/bin/webmonitor foreground'
-ExecStop=/bin/bash -lc 'source /opt/www/webmonitor/env && RELX_REPLACE_OS_VARS=true /opt/www/webmonitor/bin/webmonitor stop'
+User=slugex
+WorkingDirectory=/opt/www/slugex
+Environment=/opt/www/slugex/config/prod.env
+ExecStart=/opt/www/slugex/rel/simple/bin/simple foreground
+ExecStop=/opt/www/slugex/rel/simple/bin/simple stop
 Restart=always
 StandardInput=null
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=%n
 KillMode=process
-# 2 minutes should be enough for our process to start or stop
-TimeoutSec=120
-
-[Install]
-WantedBy=multi-user.target
+TimeoutStopSec=5
